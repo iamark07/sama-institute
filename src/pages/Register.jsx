@@ -97,7 +97,7 @@ function Register() {
                 </span>
                 <span role="img" aria-label="student" className="mr-1">
                   <img
-                    src="src/assets/img/other-objects/student.png"
+                    src="assets/img/other-objects/student.png"
                     className="w-5 hidden sm:block"
                     alt=""
                   />
@@ -128,7 +128,7 @@ function Register() {
                 </span>
                 <span role="img" aria-label="parent" className="mr-1">
                   <img
-                    src="src/assets/img/other-objects/parents.png"
+                    src="assets/img/other-objects/parents.png"
                     className="w-5 hidden sm:block"
                     alt=""
                   />

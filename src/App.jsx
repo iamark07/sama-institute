@@ -1,16 +1,16 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login'
 import Register from './pages/Register'
 
 function App() {
   return (
-    <BrowserRouter basename="/sama-institute/">
+    <Router basename="/sama-institute/">
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   )
 }
 
