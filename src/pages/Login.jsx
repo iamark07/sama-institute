@@ -15,7 +15,7 @@ function Login() {
   return (
     <div className="relative">
       <img
-        src="src/assets/img/bg-img/bg-4.jpg"
+        src="assets/img/bg-img/bg-4.jpg"
         className="w-full h-full object-cover absolute top-0 left-0 opacity-30 grayscale-100"
         alt=""
       />
@@ -105,7 +105,7 @@ function Login() {
           {/* Right Side Image */}
           <div className="hidden xl:flex flex-col justify-center bg-blue-50 w-1/2 py-10 px-7 relative">
             <img
-              src="src/assets/img/bg-img/bg-2.jpg"
+              src="assets/img/bg-img/bg-2.jpg"
               alt="Sama Institute Illustration"
               className="absolute top-0 left-0 w-full h-full object-cover"
             />

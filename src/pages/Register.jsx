@@ -48,7 +48,7 @@ function Register() {
   return (
     <div className="relative">
       <img
-        src="src/assets/img/bg-img/bg-4.jpg"
+        src="assets/img/bg-img/bg-4.jpg"
         className="w-full h-full object-cover absolute top-0 left-0 opacity-30 grayscale-100"
         alt=""
       />
@@ -57,7 +57,7 @@ function Register() {
           {/* Left Side Image & Text */}
           <div className="xl:col-span-4 hidden xl:flex flex-col justify-between bg-blue-50 py-10 px-7 relative">
             <img
-              src="src/assets/img/bg-img/bg-2.jpg"
+              src="assets/img/bg-img/bg-2.jpg"
               alt="School ERP Illustration"
               className="absolute top-0 left-0 w-full h-full object-cover object-[-220px_0px]"
             />
