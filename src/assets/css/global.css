@@ -1,0 +1,11 @@
+* {
+  font-family: "Poppins", sans-serif;
+  /* font-family: "Nunito", sans-serif; */
+  /* font-family: "Oswald", sans-serif; */
+  font-style: normal;
+  scroll-behavior: smooth;
+}
+
+.poppins {
+  font-family: "Poppins", sans-serif;
+}
