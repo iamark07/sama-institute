@@ -5,7 +5,7 @@ import Register from './pages/Register'
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/sama-institute/">
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
