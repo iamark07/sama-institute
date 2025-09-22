@@ -68,7 +68,7 @@ function Register() {
             <h2 className="text-center text-2xl md:text-3xl font-bold text-gray-900 mb-2">
               Register Now
             </h2>
-            <p className="text-center text-gray-400 mb-6 text-sm">
+            <p className="text-center text-gray-400 mb-6 text-sm md:text-base">
               Choose your category to access tailored features and resources
             </p>
             {/* Role Selector */}
@@ -144,36 +144,36 @@ function Register() {
                 {role === "student" ? (
                   <>
                     <div className="md:col-span-2">
-                      <label className="block mb-1 font-medium text-gray-700 text-sm">
+                      <label className="block mb-1 font-medium text-gray-700 text-xs md:text-sm">
                         FULL NAME
                       </label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                          <i className="ri-user-line text-gray-400 text-xl"></i>
+                          <i className="ri-user-line text-gray-400 text-lg md:text-xl"></i>
                         </div>
                         <input
                           type="text"
                           name="fullName"
                           value={form.fullName}
                           onChange={handleChange}
-                          className="w-full pl-11 pr-4 py-3.5 rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
+                          className="w-full pl-11 pr-4 py-3 md:py-3.5 text-sm md:text-base rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
                           placeholder="Enter your full name"
                         />
                       </div>
                     </div>
                     <div>
-                      <label className="block mb-1 font-medium text-gray-700 text-sm">
+                      <label className="block mb-1 font-medium text-gray-700 text-xs md:text-sm">
                         CLASS
                       </label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                          <i className="ri-book-read-line text-gray-400 text-xl"></i>
+                          <i className="ri-book-read-line text-gray-400 text-lg md:text-xl"></i>
                         </div>
                         <select
                           name="class"
                           value={form.class}
                           onChange={handleChange}
-                          className={`cursor-pointer w-full pl-11 pr-10 py-3.5 rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition appearance-none ${
+                          className={`cursor-pointer w-full pl-11 pr-10 py-3 md:py-3.5 text-sm md:text-base rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition appearance-none ${
                             form.class ? "text-gray-800" : "text-gray-400"
                           }`}
                         >
@@ -185,60 +185,60 @@ function Register() {
                           ))}
                         </select>
                         <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                          <i className="ri-arrow-down-s-line text-gray-400 text-xl"></i>
+                          <i className="ri-arrow-down-s-line text-gray-400 text-lg md:text-xl"></i>
                         </div>
                       </div>
                     </div>
                     <div>
-                      <label className="block mb-1 font-medium text-gray-700 text-sm">
+                      <label className="block mb-1 font-medium text-gray-700 text-xs md:text-sm">
                         MOBILE
                       </label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                          <i className="ri-phone-line text-gray-400 text-xl"></i>
+                          <i className="ri-phone-line text-gray-400 text-lg md:text-xl"></i>
                         </div>
                         <input
                           type="tel"
                           name="mobile"
                           value={form.mobile}
                           onChange={handleChange}
-                          className="w-full pl-11 pr-4 py-3.5 rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
+                          className="w-full pl-11 pr-4 py-3 md:py-3.5 text-sm md:text-base rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
                           placeholder="Enter your mobile number"
                         />
                       </div>
                     </div>
                     <div className="md:col-span-2">
-                      <label className="block mb-1 font-medium text-gray-700 text-sm">
+                      <label className="block mb-1 font-medium text-gray-700 text-xs md:text-sm">
                         EMAIL
                       </label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                          <i className="ri-mail-line text-gray-400 text-xl"></i>
+                          <i className="ri-mail-line text-gray-400 text-lg md:text-xl"></i>
                         </div>
                         <input
                           type="email"
                           name="email"
                           value={form.email}
                           onChange={handleChange}
-                          className="w-full pl-11 pr-4 py-3.5 rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
+                          className="w-full pl-11 pr-4 py-3 md:py-3.5 text-sm md:text-base rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
                           placeholder="Enter your email"
                         />
                       </div>
                     </div>
                     <div className="md:col-span-2">
-                      <label className="block mb-1 font-medium text-gray-700 text-sm">
+                      <label className="block mb-1 font-medium text-gray-700 text-xs md:text-sm">
                         PASSWORD
                       </label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                          <i className="ri-lock-line text-gray-400 text-xl"></i>
+                          <i className="ri-lock-line text-gray-400 text-lg md:text-xl"></i>
                         </div>
                         <input
                           type={showPassword ? "text" : "password"}
                           name="password"
                           value={form.password}
                           onChange={handleChange}
-                          className="w-full pl-11 pr-10 py-3.5 rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
+                          className="w-full pl-11 pr-10 py-3 md:py-3.5 text-sm md:text-base rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
                           placeholder="Create a password"
                         />
                         <button
@@ -246,7 +246,7 @@ function Register() {
                           onClick={() => setShowPassword(!showPassword)}
                           className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3"
                         >
-                          <i className={`text-gray-500 text-xl ${showPassword ? "ri-eye-line" : "ri-eye-off-line"}`}></i>
+                          <i className={`text-gray-500 text-lg md:text-xl ${showPassword ? "ri-eye-line" : "ri-eye-off-line"}`}></i>
                         </button>
                       </div>
                     </div>
@@ -254,37 +254,37 @@ function Register() {
                 ) : (
                   <>
                     <div className="md:col-span-2">
-                      <label className="block mb-1 font-medium text-gray-700 text-sm">
+                      <label className="block mb-1 font-medium text-gray-700 text-xs md:text-sm">
                         PARENT FULL NAME
                       </label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                          <i className="ri-user-line text-gray-400 text-xl"></i>
+                          <i className="ri-user-line text-gray-400 text-lg md:text-xl"></i>
                         </div>
                         <input
                           type="text"
                           name="parentName"
                           value={form.parentName}
                           onChange={handleChange}
-                          className="w-full pl-11 pr-4 py-3.5 rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
+                          className="w-full pl-11 pr-4 py-3 md:py-3.5 text-sm md:text-base rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
                           placeholder="Enter your full name"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block mb-1 font-medium text-gray-700 text-sm">
+                      <label className="block mb-1 font-medium text-gray-700 text-xs md:text-sm">
                         CHILD CLASS
                       </label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                          <i className="ri-book-read-line text-gray-400 text-xl"></i>
+                          <i className="ri-book-read-line text-gray-400 text-lg md:text-xl"></i>
                         </div>
                         <select
                           name="childClass"
                           value={form.childClass}
                           onChange={handleChange}
-                          className={`w-full pl-11 pr-10 py-3.5 rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition appearance-none ${
+                          className={`w-full pl-11 pr-10 py-3 md:py-3.5 text-sm md:text-base rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition appearance-none ${
                             form.childClass ? "text-gray-800" : "text-gray-400"
                           }`}
                         >
@@ -296,78 +296,78 @@ function Register() {
                           ))}
                         </select>
                         <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                          <i className="ri-arrow-down-s-line text-gray-400 text-xl"></i>
+                          <i className="ri-arrow-down-s-line text-gray-400 text-lg md:text-xl"></i>
                         </div>
                       </div>
                     </div>
                     <div>
-                      <label className="block mb-1 font-medium text-gray-700 text-sm">
+                      <label className="block mb-1 font-medium text-gray-700 text-xs md:text-sm">
                         CHILD NAME
                       </label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                          <i className="ri-user-line text-gray-400 text-xl"></i>
+                          <i className="ri-user-line text-gray-400 text-lg md:text-xl"></i>
                         </div>
                         <input
                           type="text"
                           name="childName"
                           value={form.childName}
                           onChange={handleChange}
-                          className="w-full pl-11 pr-4 py-3.5 rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
+                          className="w-full pl-11 pr-4 py-3 md:py-3.5 text-sm md:text-base rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
                           placeholder="Enter your child's name"
                         />
                       </div>
                     </div>
                     <div>
-                      <label className="block mb-1 font-medium text-gray-700 text-sm">
+                      <label className="block mb-1 font-medium text-gray-700 text-xs md:text-sm">
                         EMAIL
                       </label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                          <i className="ri-mail-line text-gray-400 text-xl"></i>
+                          <i className="ri-mail-line text-gray-400 text-lg md:text-xl"></i>
                         </div>
                         <input
                           type="email"
                           name="email"
                           value={form.email}
                           onChange={handleChange}
-                          className="w-full pl-11 pr-4 py-3.5 rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
+                          className="w-full pl-11 pr-4 py-3 md:py-3.5 text-sm md:text-base rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
                           placeholder="Enter your email"
                         />
                       </div>
                     </div>
                     <div>
-                      <label className="block mb-1 font-medium text-gray-700 text-sm">
+                      <label className="block mb-1 font-medium text-gray-700 text-xs md:text-sm">
                         MOBILE
                       </label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                          <i className="ri-phone-line text-gray-400 text-xl"></i>
+                          <i className="ri-phone-line text-gray-400 text-lg md:text-xl"></i>
                         </div>
                         <input
                           type="tel"
                           name="mobile"
                           value={form.mobile}
                           onChange={handleChange}
-                          className="w-full pl-11 pr-4 py-3.5 rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
+                          className="w-full pl-11 pr-4 py-3 md:py-3.5 text-sm md:text-base rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
                           placeholder="Enter your mobile number"
                         />
                       </div>
                     </div>
                     <div className="md:col-span-2">
-                      <label className="block mb-1 font-medium text-gray-700 text-sm">
+                      <label className="block mb-1 font-medium text-gray-700 text-xs md:text-sm">
                         PASSWORD
                       </label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                          <i className="ri-lock-line text-gray-400 text-xl"></i>
+                          <i className="ri-lock-line text-gray-400 text-lg md:text-xl"></i>
                         </div>
                         <input
                           type={showPassword ? "text" : "password"}
                           name="password"
                           value={form.password}
                           onChange={handleChange}
-                          className="w-full pl-11 pr-10 py-3.5 rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
+                          className="w-full pl-11 pr-10 py-3 md:py-3.5 text-sm md:text-base rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
                           placeholder="Create a password"
                         />
                         <button
@@ -375,7 +375,7 @@ function Register() {
                           onClick={() => setShowPassword(!showPassword)}
                           className="cursor-pointer absolute inset-y-0 right-0 flex items-center pr-3"
                         >
-                          <i className={`text-gray-500 text-xl ${showPassword ? "ri-eye-line" : "ri-eye-off-line"}`}></i>
+                          <i className={`text-gray-500 text-lg md:text-xl ${showPassword ? "ri-eye-line" : "ri-eye-off-line"}`}></i>
                         </button>
                       </div>
                     </div>
@@ -386,13 +386,13 @@ function Register() {
               <div className="flex justify-center mt-5">
                 <button
                   type="submit"
-                  className="cursor-pointer w-full md:w-1/2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-12 py-3.5 rounded-md shadow transition"
+                  className="cursor-pointer w-full md:w-1/2 bg-blue-600 hover:bg-blue-700 text-white font-bold px-12 py-3.5 rounded-md shadow transition text-sm md:text-base"
                 >
                   Register now
                 </button>
               </div>
             </form>
-            <div className="mt-6 text-center text-sm text-gray-500">
+            <div className="mt-6 text-center text-xs md:text-sm text-gray-500">
               Already have an account?{" "}
               <Link to="/" className="text-blue-600 hover:underline font-medium">
                 Sign In
