@@ -53,7 +53,7 @@ function Register() {
         alt=""
       />
       <div className="container mx-auto md:px-10 px-5 py-14 relative z-10 flex items-center justify-center">
-        <div className="w-full max-w-9xl bg-white border border-gray-200 grid xl:grid-cols-11 overflow-hidden">
+        <div className="w-full max-w-7xl bg-white border border-gray-200 grid xl:grid-cols-11 overflow-hidden">
           {/* Left Side Image & Text */}
           <div className="xl:col-span-4 hidden xl:flex flex-col justify-between bg-blue-50 py-10 px-7 relative">
             <img
