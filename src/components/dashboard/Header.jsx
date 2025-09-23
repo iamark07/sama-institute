@@ -11,7 +11,7 @@ const Header = ({ setSidebarOpen }) => {
             alt="Logo"
             className="h-8 w-auto hidden"
           />
-          <span className="ml-3 text-xl font-bold text-white">
+          <span className="text-xl font-bold text-white">
             Sama Institute
           </span>
         </div>
