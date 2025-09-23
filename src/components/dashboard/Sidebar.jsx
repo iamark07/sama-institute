@@ -5,7 +5,7 @@ const SidebarLink = ({ icon, text, to }) => (
   <NavLink
     to={to}
     className={({ isActive }) =>
-      `flex items-center px-4 py-3 rounded-md transition-colors duration-200 ${
+      `flex items-center px-4 py-3 rounded-md transition-colors duration-200 text-sm sm:text-base ${
         isActive
           ? "bg-gray-700 text-white"
           : "text-gray-300 hover:bg-gray-600 hover:text-white"
@@ -52,11 +52,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, userRole }) => {
 
       {/* Sidebar */}
       <div
-        className={`fixed lg:sticky top-0 h-[100dvh] w-64 bg-gray-800 text-white px-4 py-5 ${
+        className={`fixed lg:sticky top-0 h-[100dvh] min-w-64 bg-gray-800 text-white px-4 py-5 ${
           sidebarOpen ? "left-0" : "-left-full"
         } -left-full lg:left-0 transition-all duration-300 ease-in-out z-30 flex flex-col`}
       > 
-        <div className="flex items-center justify-between mb-6 px-4">
+        <div className="flex items-center justify-between mb-6">
           <div className="flex items-center">
             <img src="assets/img/logo/logo-light.png" alt="Logo" className="h-8 w-auto hidden" />
             <span className="text-xl font-bold">Sama Institute</span>

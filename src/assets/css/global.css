@@ -13,3 +13,10 @@
 button{
   cursor: pointer;
 }
+
+
+/* dashboard.jsx table scroll hide */
+
+.table-scroll::-webkit-scrollbar {
+  display: none;
+}

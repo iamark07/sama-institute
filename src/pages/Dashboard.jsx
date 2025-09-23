@@ -81,9 +81,9 @@ const Dashboard = () => {
       />
 
       {/* Main Layout */}
-      <div className="flex-1 flex flex-col relative z-10">
+      <div className="w-full flex flex-col relative z-10">
         <Header setSidebarOpen={setSidebarOpen} userName={user.name} />
-        <main className="flex-1">
+        <main className="w-full">
           <div className="container mx-auto lg:px-0 flex flex-col 2xl:flex-row gap-8">
             {/* Left Side (wider) */}
             <div className="w-full 2xl:w-[60%] flex flex-col gap-8 py-6 sm:py-10 px-5 sm:px-8 bg-white">
@@ -127,7 +127,7 @@ const Dashboard = () => {
                 </div>
               </div>
               {/* Top Profile Card */}
-              <div className="bg-white rounded-md p-6 flex flex-col gap-4 border border-gray-200">
+              <div className="bg-white rounded-md px-4 py-6 sm:p-6 flex flex-col gap-4 border border-gray-200">
                 <div className="flex flex-col md:flex-row xl:flex-col 2xl:flex-row items-center gap-6">
                   <img
                     src={user.profile}
@@ -200,7 +200,7 @@ const Dashboard = () => {
                 </div>
               </div>
               {/* Academic Performance */}
-              <div className="bg-white rounded-md border border-gray-200 px-6 pt-6 pb-12 sm:pb-14">
+              <div className="bg-white rounded-md border border-gray-200 px-4 sm:px-6 pt-6 pb-12 sm:pb-14">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="sm:text-lg font-semibold text-gray-800">
                     Academic Performance
@@ -265,7 +265,7 @@ const Dashboard = () => {
               {/* Parent Info & Attendance Summary */}
               <div className="flex flex-col md:flex-row gap-6">
                 {/* Parent Info */}
-                <div className="flex-1 bg-white border border-gray-200 rounded-md p-6">
+                <div className="flex-1 bg-white border border-gray-200 rounded-md px-4 py-6 sm:p-6">
                   <div className="flex items-center justify-between mb-4">
                     <h4 className="text-base sm:text-lg font-semibold text-gray-800">
                       Parent's Information
@@ -295,7 +295,7 @@ const Dashboard = () => {
                   </div>
                 </div>
                 {/* Attendance Summary */}
-                <div className="flex-1 bg-purple-50 rounded-md p-6 flex flex-col items-center">
+                <div className="flex-1 bg-purple-50 rounded-md px-4 py-6 sm:p-6 flex flex-col items-center">
                   <div className="flex items-center justify-between w-full mb-4">
                     <h4 className="text-base sm:text-lg font-semibold text-gray-800">
                       Attendance Summary
@@ -375,27 +375,27 @@ const Dashboard = () => {
                 </div>
               </div>
               {/* Grades & Assignments */}
-              <div className="">
+              <div className="w-full">
                 <div className="flex items-center justify-between mb-4">
                   <h4 className="text-md font-semibold text-gray-800">
                     Grades & Assignments
                   </h4>
                 </div>
-                <div className="bg-white rounded-md border border-gray-200 p-6 w-full">
-                  <div className="overflow-x-auto w-full">
-                    <table className="text-xs sm:text-sm min-w-full table-auto">
+                <div className="bg-white rounded-md border border-gray-200 px-4 py-6 sm:p-6 w-full">
+                  <div className="overflow-x-auto table-scroll w-full">
+                    <table className="text-xs sm:text-sm table-auto w-full">
                       <thead>
                         <tr className="text-gray-500">
-                          <th className="p-2 font-[500] text-nowrap text-left">
+                          <th className="p-2 font-[500] whitespace-nowrap text-left">
                             Subject
                           </th>
-                          <th className="p-2 font-[500] text-nowrap text-left">
+                          <th className="p-2 font-[500] whitespace-nowrap text-left">
                             Last Grade
                           </th>
-                          <th className="p-2 font-[500] text-nowrap text-left">
+                          <th className="p-2 font-[500] whitespace-nowrap text-left">
                             Avg Grade
                           </th>
-                          <th className="p-2 font-[500] text-nowrap text-left">
+                          <th className="p-2 font-[500] whitespace-nowrap text-left">
                             Improvement
                           </th>
                         </tr>
@@ -406,13 +406,13 @@ const Dashboard = () => {
                             key={i}
                             className="border-b border-gray-200 last:border-b-0"
                           >
-                            <td className="p-2.5 text-nowrap font-[500]">
+                            <td className="p-2.5 whitespace-nowrap font-[500]">
                               {a.subject}
                             </td>
-                            <td className="p-2.5 text-nowrap">{a.last}</td>
-                            <td className="p-2.5 text-nowrap">{a.avg}</td>
+                            <td className="p-2.5 whitespace-nowrap">{a.last}</td>
+                            <td className="p-2.5 whitespace-nowrap">{a.avg}</td>
                             <td
-                              className={`p-2.5 text-nowrap font-[500] ${
+                              className={`p-2.5 whitespace-nowrap font-[500] ${
                                 a.improvement === "Improved"
                                   ? "text-green-500"
                                   : "text-red-500"
@@ -426,21 +426,21 @@ const Dashboard = () => {
                     </table>
                   </div>
                 </div>
-                <div className="bg-white rounded-md border border-gray-200 p-6 mt-8">
-                  <div className="overflow-x-auto">
-                    <table className="text-xs sm:text-sm min-w-full table-auto">
+                <div className="bg-white rounded-md border border-gray-200 px-4 py-6 sm:p-6 mt-8 w-full">
+                  <div className="overflow-x-auto  table-scroll w-full">
+                    <table className="text-xs sm:text-sm table-auto w-full">
                       <thead>
                         <tr className="text-gray-500">
-                          <th className="p-2 font-[500] text-nowrap text-left">
+                          <th className="p-2 font-[500] whitespace-nowrap text-left">
                             Subject
                           </th>
-                          <th className="p-2 font-[500] text-nowrap text-left">
+                          <th className="p-2 font-[500] whitespace-nowrap text-left">
                             Task
                           </th>
-                          <th className="p-2 font-[500] text-nowrap text-left">
+                          <th className="p-2 font-[500] whitespace-nowrap text-left">
                             Due Date
                           </th>
-                          <th className="p-2 font-[500] text-nowrap text-left">
+                          <th className="p-2 font-[500] whitespace-nowrap text-left">
                             Status
                           </th>
                         </tr>
@@ -451,13 +451,13 @@ const Dashboard = () => {
                             key={i}
                             className="border-b border-gray-200 last:border-b-0"
                           >
-                            <td className="p-2.5 text-nowrap font-[500]">
+                            <td className="p-2.5 whitespace-nowrap font-[500]">
                               {t.subject}
                             </td>
-                            <td className="p-2.5 text-nowrap">{t.task}</td>
-                            <td className="p-2.5 text-nowrap">{t.due}</td>
+                            <td className="p-2.5 whitespace-nowrap">{t.task}</td>
+                            <td className="p-2.5 whitespace-nowrap">{t.due}</td>
                             <td
-                              className={`p-2.5 text-nowrap font-[500] ${
+                              className={`p-2.5 whitespace-nowrap font-[500] ${
                                 t.status === "Completed"
                                   ? "text-green-500"
                                   : "text-red-500"
@@ -479,7 +479,7 @@ const Dashboard = () => {
                 </h4>
                 <span className="absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 h-[1px] bg-gray-200"></span>
               </div>
-              <div className="flex items-center justify-between mb-6 bg-white rounded-md border border-gray-200 p-6">
+              <div className="flex items-center justify-between mb-6 bg-white rounded-md border border-gray-200 px-4 py-6 sm:p-6">
                 {user.notices.map((n, i) => (
                   <div key={i} className="flex flex-col gap-4">
                     <div className="flex items-start justify-between">
@@ -487,16 +487,16 @@ const Dashboard = () => {
                         <img
                           src={n.avatar}
                           alt={n.name}
-                          className="w-12 h-12 rounded-full object-cover"
+                          className="w-10 sm:w-12 h-10 sm:h-12 rounded-full object-cover"
                         />
                         <div>
-                          <div className="font-semibold text-gray-900 text-base">
+                          <div className="font-semibold text-gray-900 text-sm sm:text-base">
                             {n.name}
                           </div>
-                          <div className="text-xs text-gray-400">{n.role}</div>
+                          <div className="text-[11px] sm:text-xs text-gray-400">{n.role}</div>
                         </div>
                       </div>
-                      <button className="flex items-center gap-1 text-gray-400 hover:text-blue-500 xm:text-sm font-medium">
+                      <button className="flex items-center mt-2 gap-1 text-gray-400 hover:text-blue-500 text-xs sm:text-sm font-medium">
                         <span className="sm:text-lg font-semibold">+</span>{" "}
                         Comment
                       </button>
@@ -513,7 +513,7 @@ const Dashboard = () => {
                       <div className="text-gray-600 text-xs">{n.desc}</div>
                     </div>
                     <div className="flex items-center justify-between mt-2">
-                      <div className="flex gap-6 text-base">
+                      <div className="flex gap-2 sm:gap-6 text-sm sm:text-base">
                         <span className="flex items-center gap-1 text-yellow-500 font-medium">
                           <span role="img" aria-label="like">
                             👍
@@ -527,7 +527,7 @@ const Dashboard = () => {
                           {n.loves}
                         </span>
                       </div>
-                      <div className="flex items-center gap-2 text-gray-500 text-sm">
+                      <div className="flex items-center gap-2 text-gray-500 text-[11px] sm:text-sm">
                         <span>{n.comments} comments</span>
                         <span className="flex -space-x-2 ml-2">
                           <img
