@@ -12,6 +12,14 @@ const Dashboard = () => {
     email: "shubhamray@gmail.com",
     address: "245 Delo Street",
     profile: "https://randomuser.me/api/portraits/men/32.jpg",
+    academicInfo: {
+      enrollmentNo: "UNI - 2456826",
+      class: "10th",
+      section: "A",
+      rollNo: "25",
+      admissionDate: "12 Apr, 2020",
+      status: "Active",
+    },
     attendance: { total: 25, last: 10, absent: 2, percent: 85 },
     parents: [
       {
@@ -122,7 +130,7 @@ const Dashboard = () => {
                   <img
                     src={user.profile}
                     alt="Profile"
-                    className="w-16 h-16 rounded-full object-cover"
+                    className="w-32 h-32 object-cover"
                   />
                   <div className="text-sm text-gray-500 w-full">
                     <div className="text-center md:text-left xl:text-center 2xl:text-left mb-5 md:mb-0 xl:mb-5 2xl:mb-0">
@@ -130,6 +138,9 @@ const Dashboard = () => {
                       <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">
                         {user.name}
                       </h2>
+                      <div className="mt-2 text-xs font-medium text-white bg-blue-500 inline-block px-2 py-1 rounded">
+                        Class: {user.academicInfo.class} - Section {user.academicInfo.section}
+                      </div>
                     </div>
                     <div className="flex flex-wrap xl:flex-col 2xl:flex-row gap-4 md:gap-8 xl:gap-4 2xl:gap-8 mt-3 w-full">
                       <div className="flex flex-col gap-1 text-gray-500">
