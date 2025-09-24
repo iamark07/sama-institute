@@ -113,7 +113,7 @@ const Dashboard = () => {
               {/* Top Info Row */}
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-xl md:text-2xl font-semibold text-gray-800">
+                  <div className="text-lg md:text-2xl font-semibold text-gray-800">
                     {user.id}
                   </div>
                   <div className="text-xs text-gray-400">
@@ -209,56 +209,66 @@ const Dashboard = () => {
                     <option>All</option>
                   </select>
                 </div>
-                {/* New Attractive Bar Chart */}
-                <div className="relative h-48 w-full mt-8">
-                  {/* Background Lines */}
-                  <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-between -z-0">
-                    {[...Array(4)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="border-t border-dashed border-gray-200"
-                      ></div>
-                    ))}
+                {/* New Attractive Bar Chart with Y-axis */}
+                <div className="flex gap-2 sm:gap-4 mt-8">
+                  {/* Y-axis Labels */}
+                  <div className="flex flex-col justify-between h-48 text-[10px] sm:text-xs text-gray-500">
+                    <span>200</span>
+                    <span>150</span>
+                    <span>100</span>
+                    <span>50</span>
+                    <span>0</span>
                   </div>
-                  {/* Bars */}
-                  <div className="relative flex items-end gap-4 md:gap-8 h-full w-full px-2">
-                    {user.grades.map((g, i) => (
-                      <div
-                        key={i}
-                        className="group flex flex-col items-center flex-1 h-full justify-end"
-                      >
+                  <div className="relative h-48 w-full">
+                    {/* Background Lines */}
+                    <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-between">
+                      {[...Array(5)].map((_, i) => (
                         <div
-                          className="relative w-full flex justify-center"
-                          style={{ height: "100%" }}
+                          key={i}
+                          className="border-t border-dashed border-gray-200"
+                        ></div>
+                      ))}
+                    </div>
+                    {/* Bars */}
+                    <div className="relative flex items-end gap-4 md:gap-8 h-full w-full">
+                      {user.grades.map((g, i) => (
+                        <div
+                          key={i}
+                          className="group flex flex-col items-center flex-1 h-full justify-end"
                         >
-                          {/* Tooltip */}
-                          <div className="absolute -top-8 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                            {g.grade} Grade
-                            <div className="absolute left-1/2 -bottom-1 w-2 h-2 bg-gray-800 transform rotate-45 -translate-x-1/2"></div>
-                          </div>
-                          {/* Bar */}
                           <div
-                            className={`self-end w-10 md:w-20 cursor-pointer rounded-t-md transition-all duration-500 ease-out group-hover:shadow-lg ${
-                              [
-                                "bg-blue-400",
-                                "bg-pink-400",
-                                "bg-yellow-400",
-                                "bg-green-400",
-                                "bg-purple-400",
-                              ][i % 5]
-                            }`}
-                            style={{
-                              height: `${(g.grade / 200) * 100}%`,
-                              minHeight: "16px",
-                            }}
-                            title={`Grade ${g.grade}`}
-                          ></div>
+                            className="relative w-full flex justify-center"
+                            style={{ height: "100%" }}
+                          >
+                            {/* Tooltip */}
+                            <div className="absolute -top-8 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                              {g.grade} Grade
+                              <div className="absolute left-1/2 -bottom-1 w-2 h-2 bg-gray-800 transform rotate-45 -translate-x-1/2"></div>
+                            </div>
+                            {/* Bar */}
+                            <div
+                              className={`self-end w-10 md:w-20 cursor-pointer rounded-t-md transition-all duration-500 ease-out group-hover:shadow-lg ${
+                                [
+                                  "bg-blue-400",
+                                  "bg-pink-400",
+                                  "bg-yellow-400",
+                                  "bg-green-400",
+                                  "bg-purple-400",
+                                ][i % 5]
+                              }`}
+                              style={{
+                                height: `${(g.grade / 200) * 100}%`,
+                                minHeight: "16px",
+                              }}
+                              title={`Grade ${g.grade}`}
+                            ></div>
+                          </div>
+                          <span className="absolute -bottom-6 sm:-bottom-8 mt-3 text-[9px] sm:text-xs md:text-sm font-medium text-gray-600 text-center">
+                            {g.subject}
+                          </span>
                         </div>
-                        <span className="absolute -bottom-6 sm:-bottom-8 mt-3 text-[9px] sm:text-xs md:text-sm font-medium text-gray-600 text-center">
-                          {g.subject}
-                        </span>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -409,7 +419,9 @@ const Dashboard = () => {
                             <td className="p-2.5 whitespace-nowrap font-[500]">
                               {a.subject}
                             </td>
-                            <td className="p-2.5 whitespace-nowrap">{a.last}</td>
+                            <td className="p-2.5 whitespace-nowrap">
+                              {a.last}
+                            </td>
                             <td className="p-2.5 whitespace-nowrap">{a.avg}</td>
                             <td
                               className={`p-2.5 whitespace-nowrap font-[500] ${
@@ -454,7 +466,9 @@ const Dashboard = () => {
                             <td className="p-2.5 whitespace-nowrap font-[500]">
                               {t.subject}
                             </td>
-                            <td className="p-2.5 whitespace-nowrap">{t.task}</td>
+                            <td className="p-2.5 whitespace-nowrap">
+                              {t.task}
+                            </td>
                             <td className="p-2.5 whitespace-nowrap">{t.due}</td>
                             <td
                               className={`p-2.5 whitespace-nowrap font-[500] ${
@@ -493,7 +507,9 @@ const Dashboard = () => {
                           <div className="font-semibold text-gray-900 text-sm sm:text-base">
                             {n.name}
                           </div>
-                          <div className="text-[11px] sm:text-xs text-gray-400">{n.role}</div>
+                          <div className="text-[11px] sm:text-xs text-gray-400">
+                            {n.role}
+                          </div>
                         </div>
                       </div>
                       <button className="flex items-center mt-2 gap-1 text-gray-400 hover:text-blue-500 text-xs sm:text-sm font-medium">
