@@ -240,14 +240,9 @@ const Dashboard = () => {
                             className="relative w-full flex justify-center"
                             style={{ height: "100%" }}
                           >
-                            {/* Tooltip */}
-                            <div className="absolute -top-8 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                              {g.grade} Grade
-                              <div className="absolute left-1/2 -bottom-1 w-2 h-2 bg-gray-800 transform rotate-45 -translate-x-1/2"></div>
-                            </div>
                             {/* Bar */}
                             <div
-                              className={`self-end w-10 md:w-20 cursor-pointer rounded-t-md transition-all duration-500 ease-out group-hover:shadow-lg ${
+                              className={`self-end relative w-10 md:w-20 cursor-pointer rounded-t-md transition-all duration-500 ease-out group-hover:shadow-lg ${
                                 [
                                   "bg-blue-400",
                                   "bg-pink-400",
@@ -261,7 +256,13 @@ const Dashboard = () => {
                                 minHeight: "16px",
                               }}
                               title={`Grade ${g.grade}`}
-                            ></div>
+                            >
+                              {/* Tooltip */}
+                              <div className="absolute -top-8 bg-gray-800 text-white text-xs rounded px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                {g.grade} Grade
+                                <div className="absolute left-1/2 -bottom-1 w-2 h-2 bg-gray-800 transform rotate-45 -translate-x-1/2"></div>
+                              </div>
+                            </div>
                           </div>
                           <span className="absolute -bottom-6 sm:-bottom-8 mt-3 text-[9px] sm:text-xs md:text-sm font-medium text-gray-600 text-center">
                             {g.subject}
