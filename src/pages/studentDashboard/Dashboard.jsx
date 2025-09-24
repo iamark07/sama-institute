@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Sidebar from "../components/dashboard/Sidebar.jsx";
-import Header from "../components/dashboard/Header.jsx";
+import Sidebar from "../../components/dashboardComponents/Sidebar.jsx";
+import Header from "../../components/dashboardComponents/Header.jsx";
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -95,18 +95,8 @@ const Dashboard = () => {
                     placeholder="Search here..."
                     className="w-full border pl-11 pr-10 py-3 md:py-3.5 text-sm md:text-base rounded-md border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
                   />
-                  <span className="absolute left-4 top-3.5 text-gray-400">
-                    <svg
-                      width="18"
-                      height="18"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      className="inline-block"
-                    >
-                      <circle cx="8" cy="8" r="6" />
-                      <path d="M16 16L12.5 12.5" />
-                    </svg>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                    <i class="ri-search-line text-lg"></i>
                   </span>
                 </div>
               </div>
@@ -121,8 +111,8 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className="flex gap-3">
-                  <button className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#f7f7f7] flex items-center justify-center transition">
-                    <i className="ri-phone-line text-2xl text-gray-400"></i>
+                  <button className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#f3eeff] flex items-center justify-center transition">
+                    <i className="ri-phone-fill text-2xl text-purple-400"></i>
                   </button>
                 </div>
               </div>
@@ -164,37 +154,37 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-                  <div className="bg-gray-50 rounded-lg p-4 flex items-center gap-3">
-                    <div className="bg-blue-100 text-blue-600 rounded-full w-12 h-12 flex items-center justify-center">
+                  <div className="bg-blue-100 rounded-lg p-4 flex flex-col justify-center text-center items-center gap-3">
+                    <div className="bg-blue-400 text-white rounded-full w-12 h-12 flex items-center justify-center">
                       <i className="ri-calendar-check-line text-xl"></i>
                     </div>
                     <div>
                       <div className="text-lg font-semibold text-gray-800">
                         {user.attendance.total} Days
                       </div>
-                      <div className="text-sm text-gray-500">Total Present</div>
+                      <div className="text-sm text-gray-900">Total Present</div>
                     </div>
                   </div>
-                  <div className="bg-gray-50 rounded-lg p-4 flex items-center gap-3">
-                    <div className="bg-green-100 text-green-600 rounded-full w-12 h-12 flex items-center justify-center">
+                  <div className="bg-green-100 rounded-lg p-4 flex flex-col justify-center text-center items-center gap-3">
+                    <div className="bg-green-400 text-white rounded-full w-12 h-12 flex items-center justify-center">
                       <i className="ri-time-line text-xl"></i>
                     </div>
                     <div>
                       <div className="text-lg font-semibold text-gray-800">
                         {user.attendance.last} Days
                       </div>
-                      <div className="text-sm text-gray-500">Last Session</div>
+                      <div className="text-sm text-gray-900">Last Session</div>
                     </div>
                   </div>
-                  <div className="bg-gray-50 rounded-lg p-4 flex items-center gap-3">
-                    <div className="bg-red-100 text-red-600 rounded-full w-12 h-12 flex items-center justify-center">
+                  <div className="bg-red-100 rounded-lg p-4 flex flex-col justify-center text-center items-center gap-3">
+                    <div className="bg-red-400 text-white rounded-full w-12 h-12 flex items-center justify-center">
                       <i className="ri-close-circle-line text-xl"></i>
                     </div>
                     <div>
                       <div className="text-lg font-semibold text-gray-800">
                         {user.attendance.absent} Days
                       </div>
-                      <div className="text-sm text-gray-500">Total Absent</div>
+                      <div className="text-sm text-gray-900">Total Absent</div>
                     </div>
                   </div>
                 </div>
@@ -361,27 +351,17 @@ const Dashboard = () => {
               </div>
             </div>
             {/* Right Side (narrower) */}
-            <div className="w-full 2xl:w-[40%] flex flex-col gap-8 bg-transparent px-5 xl:pl-0 xl:pr-8 py-6 sm:py-10">
+            <div className="w-full 2xl:w-[40%] flex flex-col gap-8 bg-transparent px-5 xl:pl-0 xl:pr-8 py-6 sm:py-8">
               {/* Desktop Search bar */}
-              <div className="hidden xl:flex items-center justify-between">
+              <div className="hidden xl:flex items-center justify-between bg-white rounded-md border border-gray-200 px-4 py-6 sm:p-6 w-full">
                 <div className="relative w-full">
                   <input
                     type="text"
                     placeholder="Search here..."
                     className="w-full border pl-11 pr-10 py-3 md:py-3.5 text-sm md:text-base rounded-md border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
                   />
-                  <span className="absolute left-4 top-3.5 text-gray-400">
-                    <svg
-                      width="18"
-                      height="18"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      className="inline-block"
-                    >
-                      <circle cx="8" cy="8" r="6" />
-                      <path d="M16 16L12.5 12.5" />
-                    </svg>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 mt-[1px]">
+                    <i class="ri-search-line text-xl"></i>
                   </span>
                 </div>
               </div>
@@ -514,7 +494,7 @@ const Dashboard = () => {
                         </div>
                       </div>
                       <button className="flex items-center mt-2 gap-1 text-gray-400 hover:text-blue-500 text-xs sm:text-sm font-medium">
-                        <span className="sm:text-lg font-semibold">+</span>{" "}
+                        <span className="sm:text-lg font-[500]">+</span>{" "}
                         Comment
                       </button>
                     </div>
