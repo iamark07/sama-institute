@@ -1,8 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const SidebarLink = ({ icon, text, to }) => (
+const SidebarLink = ({ icon, text, to, end }) => (
   <NavLink
+    end={end}
     to={to}
     className={({ isActive }) =>
       `flex items-center px-4 py-3 rounded-md transition-colors duration-200 text-sm sm:text-base ${
@@ -23,30 +24,31 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, userRole }) => {
       to: "/dashboard",
       icon: <i className="ri-home-4-line"></i>,
       text: "Dashboard",
+      end: true,
     },
-    { to: "/profile", icon: <i className="ri-user-line"></i>, text: "Profile" },
+    { to: "/dashboard/profile", icon: <i className="ri-user-line"></i>, text: "Profile" },
     {
-      to: "/courses",
+      to: "/dashboard/courses",
       icon: <i className="ri-book-open-line"></i>,
       text: "Courses",
     },
     {
-      to: "/assignments",
+      to: "/dashboard/assignments",
       icon: <i className="ri-file-list-3-line"></i>,
       text: "Assignments",
     },
     {
-      to: "/attendance",
+      to: "/dashboard/attendance",
       icon: <i className="ri-calendar-check-line"></i>,
       text: "Attendance",
     },
     {
-      to: "/exams",
+      to: "/dashboard/exams",
       icon: <i className="ri-pencil-ruler-2-line"></i>,
       text: "Exam Schedule",
     },
     {
-      to: "/messages",
+      to: "/dashboard/messages",
       icon: <i className="ri-message-2-line"></i>,
       text: "Messages",
     },
@@ -127,6 +129,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, userRole }) => {
               key={link.text}
               to={link.to}
               icon={link.icon}
+              end={link.end}
               text={link.text}
             />
           ))}

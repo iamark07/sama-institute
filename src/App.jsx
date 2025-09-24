@@ -1,9 +1,14 @@
-import React from 'react'
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './pages/Login'
-import Register from './pages/Register'
-import Dashboard from './pages/studentDashboard/Dashboard'
-import Profile from './pages/studentDashboard/Profile';
+import Login from './pages/Login';
+import Register from './pages/Register';
+
+// Layout
+import StudentLayout from './pages/dashboard/dashboard_data/StudentLayout';
+
+// Child pages
+import Dashboard from './pages/dashboard/dashboard_data/dashboard_pages/Dashboard';
+import Profile from './pages/dashboard/dashboard_data/dashboard_pages/Profile';
 
 function App() {
   return (
@@ -11,11 +16,16 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/profile" element={<Profile />} />
+
+        {/* Dashboard layout parent */}
+        <Route path="/dashboard" element={<StudentLayout />}>
+          {/* Nested child pages */}
+          <Route index element={<Dashboard />} /> 
+          <Route path="profile" element={<Profile />} />
+        </Route>
       </Routes>
     </Router>
   )
 }
 
-export default App
+export default App;
