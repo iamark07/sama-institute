@@ -17,7 +17,7 @@ const Dashboard = () => {
               className="w-full border pl-11 pr-10 py-3 md:py-3.5 text-sm md:text-base rounded-md border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
             />
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
-              <i class="ri-search-line text-lg"></i>
+              <i className="ri-search-line text-lg"></i>
             </span>
           </div>
         </div>
@@ -286,7 +286,7 @@ const Dashboard = () => {
               className="w-full border pl-11 pr-10 py-3 md:py-3.5 text-sm md:text-base rounded-md border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
             />
             <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 mt-[1px]">
-              <i class="ri-search-line text-xl"></i>
+              <i className="ri-search-line text-xl"></i>
             </span>
           </div>
         </div>
