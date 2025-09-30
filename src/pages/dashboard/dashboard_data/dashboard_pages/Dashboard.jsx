@@ -5,7 +5,7 @@ const Dashboard = () => {
   const { studentData: user } = useOutletContext();
 
   return (
-    <div className="container mx-auto lg:px-0 flex flex-col 2xl:flex-row gap-8">
+    <div className="w-full lg:px-0 flex flex-col 2xl:flex-row gap-8">
       {/* Left Side (wider) */}
       <div className="w-full 2xl:w-[60%] flex flex-col gap-8 py-6 sm:py-10 px-5 sm:px-8 bg-white">
         {/* mobile Search bar */}
@@ -32,7 +32,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="flex gap-3">
-            <button className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#f3eeff] flex items-center justify-center transition">
+            <button className="w-12 h-12 md:w-14 md:h-14 rounded-full border border-purple-200 bg-[#f3eeff] flex items-center justify-center transition">
               <i className="ri-phone-fill text-2xl text-purple-400"></i>
             </button>
           </div>
@@ -201,13 +201,8 @@ const Dashboard = () => {
               {user.parents.map((p, i) => (
                 <div
                   key={i}
-                  className="flex items-center gap-3 bg-pink-50 rounded-md px-3 py-3 "
+                  className="flex items-center gap-3 bg-[#f9f9f9] rounded-md px-3 py-3 "
                 >
-                  <img
-                    src={p.img}
-                    alt={p.name}
-                    className="w-10 h-10 rounded-full"
-                  />
                   <div>
                     <div className="font-semibold text-sm sm:text-base text-gray-800">
                       {p.name}
@@ -422,12 +417,12 @@ const Dashboard = () => {
                   <span className="sm:text-lg font-[500]">+</span> Comment
                 </button>
               </div>
-              <div className="bg-gray-50 rounded-md px-4 py-3">
+              <div className="bg-[#f9f9f9] rounded-md px-4 py-3">
                 <div className="flex gap-5 w-full justify-between mb-2">
                   <div className="text-blue-600 font-semibold text-base cursor-pointer mb-1">
                     {n.title}
                   </div>
-                  <div className="text-xs text-gray-400 whitespace-nowrap ml-4">
+                  <div className="text-xs text-gray-600 whitespace-nowrap ml-4">
                     {n.date}
                   </div>
                 </div>

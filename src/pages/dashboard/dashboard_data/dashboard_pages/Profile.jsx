@@ -1,271 +1,526 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
-  // 1. Get the shared data from the parent layout's context.
-  // The context provides `studentData`, which we alias to `user`.
   const { studentData: user } = useOutletContext();
-  // State for managing UI interactions within this page.
-  const [isEditing, setIsEditing] = useState(false);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  // Helper component for displaying information fields.
-  const InfoField = ({ label, value }) => (
-    <div>
-      <p className="text-xs text-gray-400">{label}</p>
-      <p className="font-[500] text-gray-800 text-base">{value}</p>
-    </div>
+  const [editingSection, setEditingSection] = useState(null); // 'personal', 'academic', 'parent', 'security'
+  const [editData, setEditData] = useState(JSON.parse(JSON.stringify(user))); // Deep copy
+  const [imagePreview, setImagePreview] = useState(null);
+
+  // Refs for focusing on the first input of each section
+  const personalRef = useRef(null);
+  const academicRef = useRef(null);
+  const parentRef = useRef(null);
+  const securityRef = useRef(null);
+  const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    const refs = {
+      personal: personalRef,
+      academic: academicRef,
+      parent: parentRef,
+      security: securityRef,
+    };
+    if (editingSection && refs[editingSection]?.current) {
+      refs[editingSection].current.focus();
+    }
+    // Reset data if no section is being edited
+    if (!editingSection) {
+      setEditData(JSON.parse(JSON.stringify(user)));
+      setImagePreview(null);
+    }
+  }, [editingSection, user]);
+
+  // Helper for editable fields
+  const EditableField = ({ label, value, name, type = "text" }) => (
+    <tr>
+      <td className="py-2 pr-4 text-xs text-gray-400">{label}</td>
+      <td className="py-2">
+        {isEditing ? (
+          <input
+            type={type}
+            name={name}
+            value={editData[name] || ""}
+            onChange={(e) =>
+              setEditData({ ...editData, [name]: e.target.value })
+            }
+            className="w-full border px-7 py-2 md:py-2.5 text-sm md:text-base rounded-md border-gray-300 focus:ring focus:ring-blue-400 outline-none transition"
+          />
+        ) : (
+          <span className="font-[500] text-gray-800 text-base">{value}</span>
+        )}
+      </td>
+    </tr>
   );
 
+  const handleSave = (section) => {
+    console.log(`Saving ${section} data:`, editData);
+    if (section === "profileImage") {
+      // Here you would typically make an API call to upload the new image.
+      // For this example, we'll just log it and update the state.
+      console.log("New image to upload:", editData.profile);
+    }
+    setEditingSection(null);
+    setImagePreview(null);
+    // Here you would typically make an API call to save the data
+  };
+
+  const handleCancel = () => {
+    setEditData(JSON.parse(JSON.stringify(user))); // Reset data from original user object
+    setImagePreview(null);
+    setEditingSection(null);
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+        setEditData({ ...editData, profile: reader.result });
+        setEditingSection("profileImage");
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const triggerFileSelect = () => fileInputRef.current.click();
+
+  const isSectionEditing = (section) => editingSection === section;
+
+  // Personal Info fields
+  const personalFields = [
+    { label: "Full Name", value: user.personalInfo.fullName, name: "fullName" },
+    { label: "Date of Birth", value: user.personalInfo.dob, name: "dob" },
+    { label: "Gender", value: user.personalInfo.gender, name: "gender" },
+    {
+      label: "Blood Group",
+      value: user.personalInfo.bloodGroup,
+      name: "bloodGroup",
+    },
+    {
+      label: "Contact Number",
+      value: user.personalInfo.contact,
+      name: "contact",
+    },
+    {
+      label: "Alternate Contact",
+      value: user.personalInfo.alternateContact,
+      name: "alternateContact",
+    },
+    { label: "Address", value: user.personalInfo.address, name: "address" },
+    { label: "Email", value: user.email, name: "email" },
+  ];
+
+  // Academic Info fields
+  const academicFields = [
+    {
+      label: "Enrollment No.",
+      value: user.academicInfo.enrollmentNo,
+      name: "enrollmentNo",
+    },
+    { label: "Class", value: user.academicInfo.class, name: "class" },
+    { label: "Section", value: user.academicInfo.section, name: "section" },
+    { label: "Roll No.", value: user.academicInfo.rollNo, name: "rollNo" },
+    { label: "Status", value: user.academicInfo.status, name: "status" },
+  ];
+
+  // Parent Info fields
+  const parentFields = user.parents.map((p, i) => ({
+    label: `${p.relation} Name`,
+    value: p.name,
+    name: `parent_${i}_name`,
+    img: p.img,
+    relation: p.relation,
+  }));
+
   return (
-    // 2. The component now returns only its content, without the layout wrappers.
-    <>
-      <div className="container mx-auto lg:px-0 flex flex-col 2xl:flex-row gap-8">
-        {/* Left Side (wider) */}
-        <div className="w-full 2xl:w-[60%] flex flex-col gap-8 py-6 sm:py-10 px-5 sm:px-8 bg-white">
-          {/* Top Info Row */}
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <div className="text-lg md:text-2xl font-semibold text-gray-800">
-                {user.id}
-              </div>
-              <div className="text-xs text-gray-400">
-                Student unique identifier
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <button className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#f3eeff] flex items-center justify-center transition">
-                <i className="ri-phone-fill text-2xl text-purple-400"></i>
-              </button>
-            </div>
+    <div className="w-full min-h-screen bg-white pb-8 relative">
+      {/* Profile Header */}
+      <img
+        src="/assets/img/bg-img/bg-4.jpg"
+        alt="background"
+        className="w-full h-full object-cover absolute top-0 left-0 opacity-10"
+      />
+      <div className="w-full relative py-8">
+        <img src="/assets/img/bg-img/bg-5.jpg" alt="" className="w-full h-full absolute top-0 left-0 object-cover opacity-30"/>
+        <div className="relative z-10 flex flex-col items-center">
+          <div className="relative group z-10">
+            <img
+              src={imagePreview || user.profile}
+              alt="Profile"
+              className="w-32 h-32 rounded-md object-cover"
+            />
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={handleImageChange}
+              className="hidden"
+              accept="image/*"
+            />
+            <button
+              onClick={triggerFileSelect}
+              className="absolute inset-0 bg-black/70 bg-opacity-0 group-hover:bg-opacity-50 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity rounded-md"
+            >
+              <i className="ri-camera-line text-2xl"></i>
+            </button>
           </div>
-          {/* Profile Card */}
-          <div className="bg-white rounded-md px-4 py-6 sm:p-6 flex flex-col gap-4 border border-gray-200">
-            <div className="flex flex-col md:flex-row xl:flex-col 2xl:flex-row items-center gap-6">
-              <img
-                src={user.profile}
-                alt="Profile"
-                className="w-16 h-16 rounded-full object-cover border-4 border-blue-400"
-              />
-              <div className="text-sm text-gray-500 w-full">
-                <div className="text-center md:text-left xl:text-center 2xl:text-left mb-5 md:mb-0 xl:mb-5 2xl:mb-0">
-                  <div className="text-sm text-gray-500">{user.id}</div>
-                  <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">
-                    {user.name}
-                  </h2>
-                  <div className="text-xs text-gray-400">{user.email}</div>
-                  <div className="mt-2 text-xs font-medium text-white bg-blue-500 inline-block px-2 py-1 rounded">
-                    {user.academicInfo.class} - Section{" "}
-                    {user.academicInfo.section}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex gap-2 mt-4">
+          {isSectionEditing("profileImage") && (
+            <div className="flex justify-center gap-3 mt-4">
               <button
-                onClick={() => setIsEditing(!isEditing)}
-                className="px-5 py-2 text-sm font-semibold text-blue-700 bg-blue-50 rounded-lg hover:bg-blue-100 shadow transition"
+                onClick={handleCancel}
+                className="text-xs text-gray-600 hover:text-gray-800 font-medium px-3 py-1 rounded-md bg-gray-200"
               >
-                {isEditing ? "Cancel" : "Edit Profile"}
+                Cancel
               </button>
               <button
-                onClick={() => setShowDeleteModal(true)}
-                className="px-5 py-2 text-sm font-semibold text-red-600 bg-red-50 rounded-lg hover:bg-red-100 shadow transition"
+                onClick={() => handleSave("profileImage")}
+                className="text-xs bg-blue-600 text-white font-medium px-3 py-1 rounded-md hover:bg-blue-700"
               >
-                Delete Profile
+                Save
               </button>
             </div>
+          )}
+          <div className="flex items-center gap-2 mt-3">
+            <h2 className="text-2xl font-semibold text-gray-800">{user.name}</h2>
           </div>
-          {/* Personal Information */}
-          <div className="bg-white rounded-md border border-gray-200 px-4 py-6 sm:p-6">
-            <h3 className="sm:text-lg font-semibold text-gray-800 mb-4 border-b pb-2">
-              Personal Information
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <InfoField
-                label="Full Name"
-                value={user.personalInfo.fullName}
-              />
-              <InfoField
-                label="Date of Birth"
-                value={user.personalInfo.dob}
-              />
-              <InfoField label="Gender" value={user.personalInfo.gender} />
-              <InfoField
-                label="Blood Group"
-                value={user.personalInfo.bloodGroup}
-              />
-              <InfoField
-                label="Contact Number"
-                value={user.personalInfo.contact}
-              />
-              <InfoField
-                label="Alternate Contact"
-                value={user.personalInfo.alternateContact}
-              />
-              <div className="sm:col-span-2">
-                <InfoField
-                  label="Address"
-                  value={user.personalInfo.address}
-                />
-              </div>
-            </div>
-          </div>
-          {/* Academic Information */}
-          <div className="bg-white rounded-md border border-gray-200 px-4 py-6 sm:p-6">
-            <h3 className="sm:text-lg font-semibold text-gray-800 mb-4 border-b pb-2">
-              Academic Information
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <InfoField
-                label="Enrollment Number"
-                value={user.academicInfo.enrollmentNo}
-              />
-              <InfoField
-                label="Class / Grade"
-                value={user.academicInfo.class}
-              />
-              <InfoField
-                label="Section"
-                value={user.academicInfo.section}
-              />
-              <InfoField
-                label="Roll Number"
-                value={user.academicInfo.rollNo}
-              />
-              <InfoField
-                label="Admission Date"
-                value={user.academicInfo.admissionDate}
-              />
-              <InfoField
-                label="Current Status"
-                value={user.academicInfo.status}
-              />
-            </div>
-          </div>
-        </div>
-        {/* Right Side (narrower) */}
-        <div className="w-full 2xl:w-[40%] flex flex-col gap-8 bg-transparent px-5 xl:pl-0 xl:pr-8 py-6 sm:py-8">
-          {/* Parent/Guardian Information */}
-          <div className="bg-white rounded-md border border-gray-200 px-4 py-6 sm:p-6">
-            <h3 className="sm:text-lg font-semibold text-gray-800 mb-4 border-b pb-2">
-              Parent/Guardian Information
-            </h3>
-            <div className="space-y-6">
-              <div>
-                <h4 className="font-semibold text-gray-700 mb-2">
-                  Father's Details
-                </h4>
-                <div className="space-y-2 text-sm">
-                  <InfoField
-                    label="Name"
-                    value={user.parentInfo.father.name}
-                  />
-                  <InfoField
-                    label="Occupation"
-                    value={user.parentInfo.father.occupation}
-                  />
-                  <InfoField
-                    label="Contact"
-                    value={user.parentInfo.father.contact}
-                  />
-                </div>
-              </div>
-              <div className="border-t border-gray-200 pt-4">
-                <h4 className="font-semibold text-gray-700 mb-2">
-                  Mother's Details
-                </h4>
-                <div className="space-y-2 text-sm">
-                  <InfoField
-                    label="Name"
-                    value={user.parentInfo.mother.name}
-                  />
-                  <InfoField
-                    label="Occupation"
-                    value={user.parentInfo.mother.occupation}
-                  />
-                  <InfoField
-                    label="Contact"
-                    value={user.parentInfo.mother.contact}
-                  />
-                </div>
-              </div>
-              <div className="border-t border-gray-200 pt-4">
-                <h4 className="font-semibold text-gray-700 mb-2">
-                  Guardian's Details
-                </h4>
-                <div className="space-y-2 text-sm">
-                  <InfoField
-                    label="Name"
-                    value={user.parentInfo.guardian.name}
-                  />
-                  <InfoField
-                    label="Relation"
-                    value={user.parentInfo.guardian.relation}
-                  />
-                  <InfoField
-                    label="Contact"
-                    value={user.parentInfo.guardian.contact}
-                  />
-                </div>
-              </div>
-            </div>
+          <div className="mt-2 text-xs font-medium text-white bg-blue-500 inline-block px-2 py-1 rounded-md">
+            Class: {user.academicInfo.class} - Section {user.academicInfo.section}
           </div>
         </div>
       </div>
-      {/* Actions Section */}
-      {isEditing && (
-        <div className="container mx-auto lg:px-0 px-5 xl:pr-8">
-          <div className="bg-white rounded-md border border-gray-200 px-4 py-6 sm:p-6 mt-8">
-            <h3 className="sm:text-lg font-semibold text-gray-800 mb-4">
-              Actions
-            </h3>
-            <div className="flex flex-wrap gap-4">
-              <button className="px-6 py-2 text-sm font-semibold text-white bg-blue-600 rounded-lg hover:bg-blue-700 shadow transition">
-                Save Changes
-              </button>
+
+      {/* Details Grid */}
+      <div className="w-full px-5 md:px-10 grid md:grid-cols-2 gap-6 relative z-10 mt-8">
+        <div>
+          {/* Personal Details */}
+          <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
+            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
+              <h3 className="text-base font-semibold text-gray-800">
+                Personal Details
+              </h3>
               <button
-                onClick={() => setIsEditing(false)}
-                className="px-6 py-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 shadow transition"
+                onClick={() =>
+                  setEditingSection(
+                    isSectionEditing("personal") ? null : "personal"
+                  )
+                }
+                className="text-blue-600 hover:text-blue-800"
+                title="Edit Personal Details"
               >
-                Cancel
+                <i className="ri-pencil-line text-lg"></i>
               </button>
             </div>
+
+            <table className="w-full text-sm">
+              <tbody>
+                {personalFields.map((field, idx) => (
+                  <tr
+                    key={field.name}
+                    className={
+                      idx !== personalFields.length - 1
+                        ? "border-b border-gray-200"
+                        : ""
+                    }
+                  >
+                    <td className="py-4 px-6 text-gray-500 w-1/3">
+                      {field.label}
+                    </td>
+                    <td className="font-[500] text-gray-700">
+                      {isSectionEditing("personal") ? (
+                        <input
+                          type="text"
+                          name={field.name}
+                          value={
+                            editData.personalInfo[field.name] ??
+                            editData[field.name] ??
+                            ""
+                          }
+                          onChange={(e) =>
+                            setEditData({
+                              ...editData,
+                              personalInfo: {
+                                ...editData.personalInfo,
+                                [e.target.name]: e.target.value,
+                              },
+                            })
+                          }
+                          className="border-l border-gray-200 px-6 py-4 text-sm w-full focus:outline-none"
+                          ref={idx === 0 ? personalRef : null}
+                        />
+                      ) : (
+                        <span className="block px-6 border-l border-transparent">
+                          {field.value}
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {isSectionEditing("personal") && (
+              <div className="px-6 py-3 border-t border-gray-200 bg-[#fcfcfc] flex justify-end gap-3">
+                <button
+                  onClick={handleCancel}
+                  className="text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => handleSave("personal")}
+                  className="text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
+                >
+                  Save
+                </button>
+              </div>
+            )}
           </div>
-        </div>
-      )}
-      {/* Delete Confirmation Modal */}
-      {showDeleteModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-8 shadow-xl max-w-sm w-full">
-            <h3 className="text-xl font-bold text-gray-800 mb-4">
-              Confirm Deletion
-            </h3>
-            <p className="text-gray-600 mb-6">
-              Are you sure you want to delete this profile? This action cannot
-              be undone.
-            </p>
-            <div className="flex justify-end gap-4">
+          {/* Security Settings */}
+          <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
+            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
+              <h3 className="text-base font-semibold text-gray-800">
+                Security Settings
+              </h3>
               <button
-                onClick={() => setShowDeleteModal(false)}
-                className="px-4 py-2 font-semibold text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 shadow transition"
+                onClick={() =>
+                  setEditingSection(
+                    isSectionEditing("security") ? null : "security"
+                  )
+                }
+                className="text-blue-600 hover:text-blue-800"
+                title="Change Password"
               >
-                Cancel
-              </button>
-              <button
-                onClick={() => {
-                  /* Handle delete logic here */
-                  setShowDeleteModal(false);
-                }}
-                className="px-4 py-2 font-semibold text-white bg-red-600 rounded-lg hover:bg-red-700 shadow transition"
-              >
-                Confirm
+                <i className="ri-pencil-line text-lg"></i>
               </button>
             </div>
+            <table className="w-full text-sm">
+              <tbody>
+                <tr className="border-b border-gray-200">
+                  <td className="py-4 px-6 text-gray-500 w-1/3">Password</td>
+                  <td className="font-[500] text-gray-700">
+                    {isSectionEditing("security") ? (
+                      <input
+                        type="password"
+                        name="currentPassword"
+                        placeholder="Current Password"
+                        className="border-l border-gray-200 px-6 py-4 text-sm w-full focus:outline-none"
+                        ref={securityRef}
+                      />
+                    ) : (
+                      <span className="block px-6 border-l border-transparent">
+                        ••••••••
+                      </span>
+                    )}
+                  </td>
+                </tr>
+                {isSectionEditing("security") && (
+                  <tr>
+                    <td className="py-4 px-6 text-gray-500 w-1/3">
+                      New Password
+                    </td>
+                    <td className="font-[500] text-gray-700">
+                      <input
+                        type="password"
+                        name="newPassword"
+                        placeholder="New Password"
+                        className="border-l border-gray-200 px-6 py-4 text-sm w-full focus:outline-none"
+                      />
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+            {isSectionEditing("security") && (
+              <div className="px-6 py-3 border-t border-gray-200 bg-[#fcfcfc] flex justify-between items-center gap-3">
+                <Link
+                  to="/forgot-password"
+                  className="text-xs text-blue-600 hover:underline"
+                >
+                  Forgot Password?
+                </Link>
+                <div className="flex gap-3">
+                  <button
+                    onClick={handleCancel}
+                    className="text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={() => handleSave("security")}
+                    className="text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
+                  >
+                    Save
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
-      )}
-    </>
+        <div>
+          {/* Academic Details */}
+          <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
+            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
+              <h3 className="text-base font-semibold text-gray-800">
+                Academic Details
+              </h3>
+              <button
+                onClick={() =>
+                  setEditingSection(
+                    isSectionEditing("academic") ? null : "academic"
+                  )
+                }
+                className="text-blue-600 hover:text-blue-800"
+                title="Edit Academic Details"
+              >
+                <i className="ri-pencil-line text-lg"></i>
+              </button>
+            </div>
+            <table className="w-full text-sm">
+              <tbody>
+                {academicFields.map((field, idx) => (
+                  <tr
+                    key={field.name}
+                    className={
+                      idx !== academicFields.length - 1
+                        ? "border-b border-gray-200"
+                        : ""
+                    }
+                  >
+                    <td className="py-4 px-6 text-gray-500 w-1/3">
+                      {field.label}
+                    </td>
+                    <td className="font-[500] text-gray-700">
+                      {isSectionEditing("academic") ? (
+                        <input
+                          type="text"
+                          name={field.name}
+                          value={editData.academicInfo[field.name] || ""}
+                          onChange={(e) =>
+                            setEditData({
+                              ...editData,
+                              academicInfo: {
+                                ...editData.academicInfo,
+                                [field.name]: e.target.value,
+                              },
+                            })
+                          }
+                          className="border-l border-gray-200 px-6 py-4 text-sm w-full focus:outline-none"
+                          ref={idx === 0 ? academicRef : null}
+                        />
+                      ) : (
+                        <span className="block px-6 border-l border-transparent">
+                          {field.value}
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {isSectionEditing("academic") && (
+              <div className="px-6 py-3 border-t border-gray-200 bg-gray-[#fcfcfc] flex justify-end gap-3">
+                <button
+                  onClick={handleCancel}
+                  className="text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => handleSave("academic")}
+                  className="text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
+                >
+                  Save
+                </button>
+              </div>
+            )}
+          </div>
+          {/* Parent Details */}
+          <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
+            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
+              <h3 className="text-base font-semibold text-gray-800">
+                Parent's Information
+              </h3>
+              <button
+                onClick={() =>
+                  setEditingSection(
+                    isSectionEditing("parent") ? null : "parent"
+                  )
+                }
+                className="text-blue-600 hover:text-blue-800"
+                title="Edit Parent's Information"
+              >
+                <i className="ri-pencil-line text-lg"></i>
+              </button>
+            </div>
+            <table className="w-full text-sm">
+              <tbody>
+                {user.parents.map((p, i) => (
+                  <tr
+                    key={i}
+                    className={
+                      i !== user.parents.length - 1
+                        ? "border-b border-gray-200"
+                        : ""
+                    }
+                  >
+                    <td className="py-4 px-6 text-gray-500 w-1/3">
+                      {p.relation}
+                    </td>
+                    <td className="font-[500] text-gray-700">
+                      <div className="flex items-center gap-3">
+                        {isSectionEditing("parent") ? (
+                          <input
+                            type="text"
+                            value={editData.parents?.[i]?.name || p.name}
+                            onChange={(e) => {
+                              const updatedParents = [
+                                ...(editData.parents || user.parents),
+                              ];
+                              updatedParents[i] = {
+                                ...updatedParents[i],
+                                name: e.target.value,
+                              };
+                              setEditData({
+                                ...editData,
+                                parents: updatedParents,
+                              });
+                            }}
+                            className="border-l border-gray-200 px-6 py-4 text-sm w-full focus:outline-none"
+                            ref={i === 0 ? parentRef : null}
+                          />
+                        ) : (
+                          <span className="block px-6 border-l border-transparent">
+                            {p.name}
+                          </span>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {isSectionEditing("parent") && (
+              <div className="px-6 py-3 border-t border-gray-200 bg-[#fcfcfc] flex justify-end gap-3">
+                <button
+                  onClick={handleCancel}
+                  className="text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => handleSave("parent")}
+                  className="text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
+                >
+                  Save
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
