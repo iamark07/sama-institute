@@ -145,7 +145,11 @@ const Profile = () => {
         className="w-full h-full object-cover absolute top-0 left-0 opacity-10"
       />
       <div className="w-full relative py-8">
-        <img src="/assets/img/bg-img/bg-5.jpg" alt="" className="w-full h-full absolute top-0 left-0 object-cover opacity-30"/>
+        <img
+          src="/assets/img/bg-img/bg-5.jpg"
+          alt=""
+          className="w-full h-full absolute top-0 left-0 object-cover opacity-30"
+        />
         <div className="relative z-10 flex flex-col items-center">
           <div className="relative group z-10">
             <img
@@ -184,21 +188,24 @@ const Profile = () => {
             </div>
           )}
           <div className="flex items-center gap-2 mt-3">
-            <h2 className="text-2xl font-semibold text-gray-800">{user.name}</h2>
+            <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
+              {user.name}
+            </h2>
           </div>
           <div className="mt-2 text-xs font-medium text-white bg-blue-500 inline-block px-2 py-1 rounded-md">
-            Class: {user.academicInfo.class} - Section {user.academicInfo.section}
+            Class: {user.academicInfo.class} - Section{" "}
+            {user.academicInfo.section}
           </div>
         </div>
       </div>
 
       {/* Details Grid */}
-      <div className="w-full px-5 md:px-10 grid md:grid-cols-2 gap-6 relative z-10 mt-8">
+      <div className="w-full md:px-10 grid 2xl:grid-cols-2 gap-6 relative z-10 mt-8">
         <div>
           {/* Personal Details */}
           <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
             <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-              <h3 className="text-base font-semibold text-gray-800">
+              <h3 className="text-sm md:text-base font-semibold text-gray-800">
                 Personal Details
               </h3>
               <button
@@ -225,7 +232,7 @@ const Profile = () => {
                         : ""
                     }
                   >
-                    <td className="py-4 px-6 text-gray-500 w-1/3">
+                    <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-base">
                       {field.label}
                     </td>
                     <td className="font-[500] text-gray-700">
@@ -247,11 +254,11 @@ const Profile = () => {
                               },
                             })
                           }
-                          className="border-l border-gray-200 px-6 py-4 text-sm w-full focus:outline-none"
+                          className="border-l border-gray-200 px-6 py-4 text-[10px] md:text-sm w-full focus:outline-none"
                           ref={idx === 0 ? personalRef : null}
                         />
                       ) : (
-                        <span className="block px-6 border-l border-transparent">
+                        <span className="block px-6 border-l border-transparent text-[10px] md:text-base">
                           {field.value}
                         </span>
                       )}
@@ -264,13 +271,13 @@ const Profile = () => {
               <div className="px-6 py-3 border-t border-gray-200 bg-[#fcfcfc] flex justify-end gap-3">
                 <button
                   onClick={handleCancel}
-                  className="text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
+                  className="text-xs md:text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={() => handleSave("personal")}
-                  className="text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
+                  className="text-xs md:text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
                 >
                   Save
                 </button>
@@ -280,7 +287,7 @@ const Profile = () => {
           {/* Security Settings */}
           <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
             <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-              <h3 className="text-base font-semibold text-gray-800">
+              <h3 className="text-sm md:text-base font-semibold text-gray-800">
                 Security Settings
               </h3>
               <button
@@ -298,18 +305,20 @@ const Profile = () => {
             <table className="w-full text-sm">
               <tbody>
                 <tr className="border-b border-gray-200">
-                  <td className="py-4 px-6 text-gray-500 w-1/3">Password</td>
+                  <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-base">
+                    Password
+                  </td>
                   <td className="font-[500] text-gray-700">
                     {isSectionEditing("security") ? (
                       <input
                         type="password"
                         name="currentPassword"
                         placeholder="Current Password"
-                        className="border-l border-gray-200 px-6 py-4 text-sm w-full focus:outline-none"
+                        className="border-l border-gray-200 px-6 py-4 text-[10px] md:text-sm w-full focus:outline-none"
                         ref={securityRef}
                       />
                     ) : (
-                      <span className="block px-6 border-l border-transparent">
+                      <span className="block px-6 border-l border-transparent text-[10px] md:text-base">
                         ••••••••
                       </span>
                     )}
@@ -317,7 +326,7 @@ const Profile = () => {
                 </tr>
                 {isSectionEditing("security") && (
                   <tr>
-                    <td className="py-4 px-6 text-gray-500 w-1/3">
+                    <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-base">
                       New Password
                     </td>
                     <td className="font-[500] text-gray-700">
@@ -325,7 +334,7 @@ const Profile = () => {
                         type="password"
                         name="newPassword"
                         placeholder="New Password"
-                        className="border-l border-gray-200 px-6 py-4 text-sm w-full focus:outline-none"
+                        className="border-l border-gray-200 px-6 py-4 text-[10px] md:text-sm w-full focus:outline-none"
                       />
                     </td>
                   </tr>
@@ -336,20 +345,20 @@ const Profile = () => {
               <div className="px-6 py-3 border-t border-gray-200 bg-[#fcfcfc] flex justify-between items-center gap-3">
                 <Link
                   to="/forgot-password"
-                  className="text-xs text-blue-600 hover:underline"
+                  className="text-[10px] md:text-xs text-blue-600 hover:underline"
                 >
                   Forgot Password?
                 </Link>
                 <div className="flex gap-3">
                   <button
                     onClick={handleCancel}
-                    className="text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
+                    className="text-xs md:text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={() => handleSave("security")}
-                    className="text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
+                    className="text-xs md:text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
                   >
                     Save
                   </button>
@@ -362,7 +371,7 @@ const Profile = () => {
           {/* Academic Details */}
           <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
             <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-              <h3 className="text-base font-semibold text-gray-800">
+              <h3 className="text-sm md:text-base font-semibold text-gray-800">
                 Academic Details
               </h3>
               <button
@@ -388,7 +397,7 @@ const Profile = () => {
                         : ""
                     }
                   >
-                    <td className="py-4 px-6 text-gray-500 w-1/3">
+                    <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-base">
                       {field.label}
                     </td>
                     <td className="font-[500] text-gray-700">
@@ -406,11 +415,11 @@ const Profile = () => {
                               },
                             })
                           }
-                          className="border-l border-gray-200 px-6 py-4 text-sm w-full focus:outline-none"
+                          className="border-l border-gray-200 px-6 py-4 text-[10px] md:text-sm w-full focus:outline-none"
                           ref={idx === 0 ? academicRef : null}
                         />
                       ) : (
-                        <span className="block px-6 border-l border-transparent">
+                        <span className="block px-6 border-l border-transparent text-[10px] md:text-base">
                           {field.value}
                         </span>
                       )}
@@ -423,13 +432,13 @@ const Profile = () => {
               <div className="px-6 py-3 border-t border-gray-200 bg-gray-[#fcfcfc] flex justify-end gap-3">
                 <button
                   onClick={handleCancel}
-                  className="text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
+                  className="text-xs md:text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={() => handleSave("academic")}
-                  className="text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
+                  className="text-xs md:text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
                 >
                   Save
                 </button>
@@ -439,7 +448,7 @@ const Profile = () => {
           {/* Parent Details */}
           <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
             <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-              <h3 className="text-base font-semibold text-gray-800">
+              <h3 className="text-sm md:text-base font-semibold text-gray-800">
                 Parent's Information
               </h3>
               <button
@@ -465,7 +474,7 @@ const Profile = () => {
                         : ""
                     }
                   >
-                    <td className="py-4 px-6 text-gray-500 w-1/3">
+                    <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-base">
                       {p.relation}
                     </td>
                     <td className="font-[500] text-gray-700">
@@ -487,11 +496,11 @@ const Profile = () => {
                                 parents: updatedParents,
                               });
                             }}
-                            className="border-l border-gray-200 px-6 py-4 text-sm w-full focus:outline-none"
+                            className="border-l border-gray-200 px-6 py-4 text-[10px] md:text-sm w-full focus:outline-none"
                             ref={i === 0 ? parentRef : null}
                           />
                         ) : (
-                          <span className="block px-6 border-l border-transparent">
+                          <span className="block px-6 border-l border-transparent text-[10px] md:text-base">
                             {p.name}
                           </span>
                         )}
@@ -505,13 +514,13 @@ const Profile = () => {
               <div className="px-6 py-3 border-t border-gray-200 bg-[#fcfcfc] flex justify-end gap-3">
                 <button
                   onClick={handleCancel}
-                  className="text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
+                  className="text-xs md:text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={() => handleSave("parent")}
-                  className="text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
+                  className="text-xs md:text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
                 >
                   Save
                 </button>
