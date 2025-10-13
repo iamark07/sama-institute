@@ -157,7 +157,7 @@ const Dashboard = () => {
                     >
                       {/* Bar */}
                       <div
-                        className={`self-end relative w-10 md:w-20 cursor-pointer rounded-t-md transition-all duration-500 ease-out group-hover:shadow-lg ${
+                        className={`self-end relative w-10 md:w-20 cursor-pointer rounded-t-md transition-all duration-500 ease-out group-hover:shadow-xl ${
                           [
                             "bg-blue-400",
                             "bg-pink-400",
@@ -285,6 +285,93 @@ const Dashboard = () => {
             </span>
           </div>
         </div>
+        {/* Fee Details */}
+        <div className="w-full">
+          <div className="flex items-center justify-between mb-4">
+            <h4 className="text-md font-semibold text-gray-800">
+              Fee Details
+            </h4>
+          </div>
+          <div className="bg-white rounded-md border border-gray-200 px-4 py-6 sm:p-6 w-full">
+            {/* Fee Summary */}
+            <div className="flex justify-between items-center gap-4 mb-4">
+              <div className="text-center">
+                <div className="text-xs md:text-[13px] text-gray-500">Total Fees</div>
+                <div className="font-semibold text-gray-800">
+                  ₹{user.fees.totalFees.toLocaleString()}
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="text-xs md:text-[13px] text-gray-500">Paid</div>
+                <div className="font-semibold text-green-600">
+                  ₹{user.fees.paid.toLocaleString()}
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="text-xs md:text-[13px] text-gray-500">Due</div>
+                <div className="font-semibold text-red-600">
+                  ₹{user.fees.due.toLocaleString()}
+                </div>
+              </div>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="w-full bg-gray-200 rounded-full h-[6px] mb-6">
+              <div
+                className="bg-blue-500 h-[6px] rounded-full"
+                style={{
+                  width: `${(user.fees.paid / user.fees.totalFees) * 100}%`,
+                }}
+              ></div>
+            </div>
+
+            {/* Transaction History */}
+            <h5 className="font-semibold text-gray-700 mb-3 text-sm">
+              Transaction History
+            </h5>
+            <div className="overflow-x-auto table-scroll w-full">
+              <table className="text-xs sm:text-[13px] table-auto w-full">
+                <thead>
+                  <tr className="text-gray-500">
+                    <th className="p-2 font-[500] whitespace-nowrap text-left">
+                      ID
+                    </th>
+                    <th className="p-2 font-[500] whitespace-nowrap text-left">
+                      Date
+                    </th>
+                    <th className="p-2 font-[500] whitespace-nowrap text-right">
+                      Amount
+                    </th>
+                    <th className="p-2 font-[500] whitespace-nowrap text-right">
+                      Status
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {user.fees.transactions.map((txn) => (
+                    <tr
+                      key={txn.id}
+                      className="border-b border-gray-200 last:border-b-0"
+                    >
+                      <td className="p-2.5 whitespace-nowrap font-[500]">
+                        {txn.id}
+                      </td>
+                      <td className="p-2.5 whitespace-nowrap text-gray-600">
+                        {txn.date}
+                      </td>
+                      <td className="p-2.5 whitespace-nowrap text-right font-[500]">
+                        ₹{txn.amount.toLocaleString()}
+                      </td>
+                      <td className={`p-2.5 whitespace-nowrap font-[500] text-right ${txn.status === "Paid" ? "text-green-500" : "text-orange-500"}`}>
+                        {txn.status}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
         {/* Grades & Assignments */}
         <div className="w-full">
           <div className="flex items-center justify-between mb-4">
@@ -294,19 +381,19 @@ const Dashboard = () => {
           </div>
           <div className="bg-white rounded-md border border-gray-200 px-4 py-6 sm:p-6 w-full">
             <div className="overflow-x-auto table-scroll w-full">
-              <table className="text-xs sm:text-sm table-auto w-full">
+              <table className="text-xs sm:text-[13px] table-auto w-full">
                 <thead>
                   <tr className="text-gray-500">
                     <th className="p-2 font-[500] whitespace-nowrap text-left">
                       Subject
                     </th>
-                    <th className="p-2 font-[500] whitespace-nowrap text-left">
+                    <th className="p-2 font-[500] whitespace-nowrap text-center">
                       Last Grade
                     </th>
-                    <th className="p-2 font-[500] whitespace-nowrap text-left">
+                    <th className="p-2 font-[500] whitespace-nowrap text-center">
                       Avg Grade
                     </th>
-                    <th className="p-2 font-[500] whitespace-nowrap text-left">
+                    <th className="p-2 font-[500] whitespace-nowrap text-right">
                       Improvement
                     </th>
                   </tr>
@@ -317,68 +404,21 @@ const Dashboard = () => {
                       key={i}
                       className="border-b border-gray-200 last:border-b-0"
                     >
-                      <td className="p-2.5 whitespace-nowrap font-[500]">
+                      <td className="p-2.5 whitespace-nowrap font-[500] text-left">
                         {a.subject}
                       </td>
-                      <td className="p-2.5 whitespace-nowrap">
+                      <td className="p-2.5 whitespace-nowrap text-center">
                         {a.last}
                       </td>
-                      <td className="p-2.5 whitespace-nowrap">{a.avg}</td>
+                      <td className="p-2.5 whitespace-nowrap text-center">{a.avg}</td>
                       <td
-                        className={`p-2.5 whitespace-nowrap font-[500] ${
+                        className={`p-2.5 whitespace-nowrap font-[500] text-right ${
                           a.improvement === "Improved"
                             ? "text-green-500"
                             : "text-red-500"
                         }`}
                       >
                         {a.improvement}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div className="bg-white rounded-md border border-gray-200 px-4 py-6 sm:p-6 mt-8 w-full">
-            <div className="overflow-x-auto  table-scroll w-full">
-              <table className="text-xs sm:text-sm table-auto w-full">
-                <thead>
-                  <tr className="text-gray-500">
-                    <th className="p-2 font-[500] whitespace-nowrap text-left">
-                      Subject
-                    </th>
-                    <th className="p-2 font-[500] whitespace-nowrap text-left">
-                      Task
-                    </th>
-                    <th className="p-2 font-[500] whitespace-nowrap text-left">
-                      Due Date
-                    </th>
-                    <th className="p-2 font-[500] whitespace-nowrap text-left">
-                      Status
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {user.tasks.map((t, i) => (
-                    <tr
-                      key={i}
-                      className="border-b border-gray-200 last:border-b-0"
-                    >
-                      <td className="p-2.5 whitespace-nowrap font-[500]">
-                        {t.subject}
-                      </td>
-                      <td className="p-2.5 whitespace-nowrap">
-                        {t.task}
-                      </td>
-                      <td className="p-2.5 whitespace-nowrap">{t.due}</td>
-                      <td
-                        className={`p-2.5 whitespace-nowrap font-[500] ${
-                          t.status === "Completed"
-                            ? "text-green-500"
-                            : "text-red-500"
-                        }`}
-                      >
-                        {t.status}
                       </td>
                     </tr>
                   ))}

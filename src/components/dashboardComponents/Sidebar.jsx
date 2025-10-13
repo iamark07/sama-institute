@@ -14,7 +14,7 @@ const SidebarLink = ({ icon, text, to, end }) => (
     }
   >
     {icon}
-    <span className="mx-4 font-medium">{text}</span>
+    <span className="mx-4 font-[400]">{text}</span>
   </NavLink>
 );
 
@@ -22,34 +22,38 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, userRole }) => {
   const studentLinks = [
     {
       to: "/dashboard",
-      icon: <i className="ri-home-4-line"></i>,
+      icon: <i className="ri-home-4-line text-blue-400"></i>,
       text: "Dashboard",
       end: true,
     },
-    { to: "/profile", icon: <i className="ri-user-line"></i>, text: "Profile" },
+    {
+      to: "/profile",
+      icon: <i className="ri-user-line text-green-400"></i>,
+      text: "Profile",
+    },
     {
       to: "/courses",
-      icon: <i className="ri-book-open-line"></i>,
+      icon: <i className="ri-book-open-line text-yellow-400"></i>,
       text: "Courses",
     },
     {
       to: "/assignments",
-      icon: <i className="ri-file-list-3-line"></i>,
+      icon: <i className="ri-file-list-3-line text-purple-400"></i>,
       text: "Assignments",
     },
     {
       to: "/attendance",
-      icon: <i className="ri-calendar-check-line"></i>,
+      icon: <i className="ri-calendar-check-line text-pink-400"></i>,
       text: "Attendance",
     },
     {
       to: "/exams",
-      icon: <i className="ri-pencil-ruler-2-line"></i>,
+      icon: <i className="ri-pencil-ruler-2-line text-indigo-400"></i>,
       text: "Exam Schedule",
     },
     {
       to: "/messages",
-      icon: <i className="ri-message-2-line"></i>,
+      icon: <i className="ri-message-2-line text-teal-400"></i>,
       text: "Messages",
     },
   ];
@@ -58,32 +62,32 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, userRole }) => {
     ...studentLinks.slice(0, 2), // Dashboard, Profile
     {
       to: "/child-courses",
-      icon: <i className="ri-book-open-line"></i>,
+      icon: <i className="ri-book-open-line text-yellow-400"></i>,
       text: "Subjects",
     },
     {
       to: "/child-homework",
-      icon: <i className="ri-file-list-3-line"></i>,
+      icon: <i className="ri-file-list-3-line text-purple-400"></i>,
       text: "Homework",
     },
     {
       to: "/child-attendance",
-      icon: <i className="ri-calendar-check-line"></i>,
+      icon: <i className="ri-calendar-check-line text-pink-400"></i>,
       text: "Attendance",
     },
     {
       to: "/child-exams",
-      icon: <i className="ri-pencil-ruler-2-line"></i>,
+      icon: <i className="ri-pencil-ruler-2-line text-indigo-400"></i>,
       text: "Exam Schedule",
     },
     {
       to: "/messages",
-      icon: <i className="ri-message-2-line"></i>,
+      icon: <i className="ri-message-2-line text-teal-400"></i>,
       text: "Messages",
     },
     {
       to: "/fees",
-      icon: <i className="ri-wallet-3-line"></i>,
+      icon: <i className="ri-wallet-3-line text-orange-400"></i>,
       text: "Fee / Payments",
     },
   ];

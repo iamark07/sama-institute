@@ -2,6 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Home from './pages/Home';
+import SchoolRegistration from './pages/SchoolRegistration';
 
 // Layout
 import StudentLayout from './pages/dashboard/dashboard_data/StudentLayout';
@@ -16,6 +18,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/school-registration" element={<SchoolRegistration />} />
 
         {/* StudentLayout wraps both dashboard and profile */}
         <Route element={<StudentLayout />}>

@@ -205,7 +205,7 @@ const Profile = () => {
           {/* Personal Details */}
           <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
             <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-              <h3 className="text-sm md:text-base font-semibold text-gray-800">
+              <h3 className="text-sm md:text-base font-[650] text-gray-800">
                 Personal Details
               </h3>
               <button
@@ -232,36 +232,37 @@ const Profile = () => {
                         : ""
                     }
                   >
-                    <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-base">
+                    <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-sm">
                       {field.label}
                     </td>
                     <td className="font-[500] text-gray-700">
-                      {isSectionEditing("personal") ? (
-                        <input
-                          type="text"
-                          name={field.name}
-                          value={
-                            editData.personalInfo[field.name] ??
-                            editData[field.name] ??
-                            ""
-                          }
-                          onChange={(e) =>
-                            setEditData({
-                              ...editData,
-                              personalInfo: {
-                                ...editData.personalInfo,
-                                [e.target.name]: e.target.value,
-                              },
-                            })
-                          }
-                          className="border-l border-gray-200 px-6 py-4 text-[10px] md:text-sm w-full focus:outline-none"
-                          ref={idx === 0 ? personalRef : null}
-                        />
-                      ) : (
-                        <span className="block px-6 border-l border-transparent text-[10px] md:text-base">
-                          {field.value}
-                        </span>
-                      )}
+                      <input
+                        type="text"
+                        name={field.name}
+                        value={
+                          isSectionEditing("personal")
+                            ? editData.personalInfo[field.name] ??
+                              editData[field.name] ??
+                              ""
+                            : field.value
+                        }
+                        readOnly={!isSectionEditing("personal")}
+                        onChange={(e) =>
+                          setEditData({
+                            ...editData,
+                            personalInfo: {
+                              ...editData.personalInfo,
+                              [e.target.name]: e.target.value,
+                            },
+                          })
+                        }
+                        className={`w-full border-l px-6 py-4 text-[10px] md:text-sm focus:outline-none ${
+                          isSectionEditing("personal")
+                            ? "border-gray-200 bg-white"
+                            : "border-transparent bg-transparent cursor-default"
+                        }`}
+                        ref={idx === 0 ? personalRef : null}
+                      />
                     </td>
                   </tr>
                 ))}
@@ -287,7 +288,7 @@ const Profile = () => {
           {/* Security Settings */}
           <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
             <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-              <h3 className="text-sm md:text-base font-semibold text-gray-800">
+              <h3 className="text-sm md:text-base font-[650] text-gray-800">
                 Security Settings
               </h3>
               <button
@@ -305,28 +306,28 @@ const Profile = () => {
             <table className="w-full text-sm">
               <tbody>
                 <tr className="border-b border-gray-200">
-                  <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-base">
+                  <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-sm">
                     Password
                   </td>
                   <td className="font-[500] text-gray-700">
-                    {isSectionEditing("security") ? (
-                      <input
-                        type="password"
-                        name="currentPassword"
-                        placeholder="Current Password"
-                        className="border-l border-gray-200 px-6 py-4 text-[10px] md:text-sm w-full focus:outline-none"
-                        ref={securityRef}
-                      />
-                    ) : (
-                      <span className="block px-6 border-l border-transparent text-[10px] md:text-base">
-                        ••••••••
-                      </span>
-                    )}
+                    <input
+                      type="password"
+                      name="password"
+                      value={
+                        isSectionEditing("security") ? "" : user.password
+                      }
+                      readOnly={!isSectionEditing("security")}
+                      placeholder={isSectionEditing("security") ? "Current Password" : ""}
+                      className={`w-full border-l px-6 py-4 text-[10px] md:text-sm focus:outline-none ${
+                        isSectionEditing("security") ? "border-gray-200 bg-white" : "border-transparent bg-transparent cursor-default"
+                      }`}
+                      ref={securityRef}
+                    />
                   </td>
                 </tr>
                 {isSectionEditing("security") && (
                   <tr>
-                    <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-base">
+                    <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-sm">
                       New Password
                     </td>
                     <td className="font-[500] text-gray-700">
@@ -371,7 +372,7 @@ const Profile = () => {
           {/* Academic Details */}
           <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
             <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-              <h3 className="text-sm md:text-base font-semibold text-gray-800">
+              <h3 className="text-sm md:text-base font-[650] text-gray-800">
                 Academic Details
               </h3>
               <button
@@ -397,32 +398,35 @@ const Profile = () => {
                         : ""
                     }
                   >
-                    <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-base">
+                    <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-sm">
                       {field.label}
                     </td>
                     <td className="font-[500] text-gray-700">
-                      {isSectionEditing("academic") ? (
-                        <input
-                          type="text"
-                          name={field.name}
-                          value={editData.academicInfo[field.name] || ""}
-                          onChange={(e) =>
-                            setEditData({
-                              ...editData,
-                              academicInfo: {
-                                ...editData.academicInfo,
-                                [field.name]: e.target.value,
-                              },
-                            })
-                          }
-                          className="border-l border-gray-200 px-6 py-4 text-[10px] md:text-sm w-full focus:outline-none"
-                          ref={idx === 0 ? academicRef : null}
-                        />
-                      ) : (
-                        <span className="block px-6 border-l border-transparent text-[10px] md:text-base">
-                          {field.value}
-                        </span>
-                      )}
+                      <input
+                        type="text"
+                        name={field.name}
+                        value={
+                          isSectionEditing("academic")
+                            ? editData.academicInfo[field.name] || ""
+                            : field.value
+                        }
+                        readOnly={!isSectionEditing("academic")}
+                        onChange={(e) =>
+                          setEditData({
+                            ...editData,
+                            academicInfo: {
+                              ...editData.academicInfo,
+                              [field.name]: e.target.value,
+                            },
+                          })
+                        }
+                        className={`w-full border-l px-6 py-4 text-[10px] md:text-sm focus:outline-none ${
+                          isSectionEditing("academic")
+                            ? "border-gray-200 bg-white"
+                            : "border-transparent bg-transparent cursor-default"
+                        }`}
+                        ref={idx === 0 ? academicRef : null}
+                      />
                     </td>
                   </tr>
                 ))}
@@ -448,7 +452,7 @@ const Profile = () => {
           {/* Parent Details */}
           <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
             <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-              <h3 className="text-sm md:text-base font-semibold text-gray-800">
+              <h3 className="text-sm md:text-base font-[650] text-gray-800">
                 Parent's Information
               </h3>
               <button
@@ -474,36 +478,34 @@ const Profile = () => {
                         : ""
                     }
                   >
-                    <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-base">
+                    <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-sm">
                       {p.relation}
                     </td>
                     <td className="font-[500] text-gray-700">
                       <div className="flex items-center gap-3">
-                        {isSectionEditing("parent") ? (
-                          <input
-                            type="text"
-                            value={editData.parents?.[i]?.name || p.name}
-                            onChange={(e) => {
-                              const updatedParents = [
-                                ...(editData.parents || user.parents),
-                              ];
-                              updatedParents[i] = {
-                                ...updatedParents[i],
-                                name: e.target.value,
-                              };
-                              setEditData({
-                                ...editData,
-                                parents: updatedParents,
-                              });
-                            }}
-                            className="border-l border-gray-200 px-6 py-4 text-[10px] md:text-sm w-full focus:outline-none"
-                            ref={i === 0 ? parentRef : null}
-                          />
-                        ) : (
-                          <span className="block px-6 border-l border-transparent text-[10px] md:text-base">
-                            {p.name}
-                          </span>
-                        )}
+                        <input
+                          type="text"
+                          value={
+                            isSectionEditing("parent")
+                              ? editData.parents?.[i]?.name || p.name
+                              : p.name
+                          }
+                          readOnly={!isSectionEditing("parent")}
+                          onChange={(e) => {
+                            const updatedParents = [
+                              ...(editData.parents || user.parents),
+                            ];
+                            updatedParents[i] = {
+                              ...updatedParents[i],
+                              name: e.target.value,
+                            };
+                            setEditData({ ...editData, parents: updatedParents });
+                          }}
+                          className={`w-full border-l px-6 py-4 text-[10px] md:text-sm focus:outline-none ${
+                            isSectionEditing("parent") ? "border-gray-200 bg-white" : "border-transparent bg-transparent cursor-default"
+                          }`}
+                          ref={i === 0 ? parentRef : null}
+                        />
                       </div>
                     </td>
                   </tr>

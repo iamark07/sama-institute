@@ -7,6 +7,7 @@ export const studentData = {
   number: "+91 6325343125",
   email: "shubhamray@gmail.com",
   address: "245 Delo Street, New York, USA",
+  password: "password@123",
   profile: "https://randomuser.me/api/portraits/men/32.jpg",
   personalInfo: {
     fullName: "Shubham Ray",
@@ -42,6 +43,16 @@ export const studentData = {
       contact: "+91 9876543213",
     },
   },
+  fees: {
+    totalFees: 50000,
+    paid: 30000,
+    due: 20000,
+    transactions: [
+      { id: "TXN12345", date: "15 Apr, 2024", amount: 15000, status: "Paid" },
+      { id: "TXN12346", date: "15 May, 2024", amount: 15000, status: "Paid" },
+      { id: "TXN12347", date: "15 Jun, 2024", amount: 10000, status: "Upcoming" },
+    ],
+  },
   attendance: { total: 25, last: 10, absent: 2, percent: 85 },
   parents: [
     {
@@ -67,20 +78,6 @@ export const studentData = {
     { subject: "English", last: "B+", avg: "B", improvement: "Stable" },
     { subject: "Science", last: "C", avg: "A", improvement: "Improved" },
     { subject: "Sports", last: "A", avg: "A", improvement: "Improved" },
-  ],
-  tasks: [
-    {
-      subject: "Mathematics",
-      task: "Geometry Builders",
-      due: "Oct 31",
-      status: "Completed",
-    },
-    {
-      subject: "English",
-      task: "Character Profile",
-      due: "Nov 05",
-      status: "Pending",
-    },
   ],
   notices: [
     {
