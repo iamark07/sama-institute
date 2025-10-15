@@ -1,24 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const SidebarLink = ({ icon, text, to, end }) => (
-  <NavLink
-    end={end}
-    to={to}
-    className={({ isActive }) =>
-      `flex items-center px-4 py-3 rounded-md transition-colors duration-200 text-sm sm:text-base ${
-        isActive
-          ? "bg-gray-700 text-white"
-          : "text-gray-300 hover:bg-gray-600 hover:text-white"
-      }`
-    }
-  >
-    {icon}
-    <span className="mx-4 font-[400]">{text}</span>
-  </NavLink>
-);
-
-const Sidebar = ({ sidebarOpen, setSidebarOpen, userRole }) => {
+const Sidebar = ({
+  isOpen,
+  setIsOpen,
+  isCollapsed,
+  setIsCollapsed,
+  userRole,
+}) => {
   const studentLinks = [
     {
       to: "/dashboard",
@@ -98,57 +87,94 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen, userRole }) => {
     <>
       {/* Mobile overlay */}
       <div
-        className={`fixed inset-0 bg-black/50 z-20 lg:hidden ${
-          sidebarOpen ? "block" : "hidden"
+        className={`fixed inset-0 bg-black/60 z-30 lg:hidden ${
+          isOpen ? "block" : "hidden"
         }`}
-        onClick={() => setSidebarOpen(false)}
+        onClick={() => setIsOpen(false)}
       ></div>
 
       {/* Sidebar */}
-      <div
-        className={`fixed lg:sticky top-0 h-[100dvh] min-w-64 bg-gray-800 text-white px-4 py-5 ${
-          sidebarOpen ? "left-0" : "-left-full"
-        } -left-full lg:left-0 transition-all duration-300 ease-in-out z-30 flex flex-col`}
+      <aside
+        className={`fixed lg:sticky top-0 h-[100dvh] bg-gray-800 text-white flex flex-col !z-[999] transition-all duration-300 lg:transition-none lg:duration-initial ${isOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 lg:relative ${isCollapsed ? "min-w-20" : "min-w-64"}`}
       >
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center">
-            <img
-              src="assets/img/logo/logo-light.png"
-              alt="Logo"
-              className="h-8 w-auto hidden"
-            />
-            <span className="text-xl font-bold">Sama Institute</span>
-          </div>
+        {/* Header Section */}
+        <div className={`flex items-center ${isCollapsed ? "justify-center" : "justify-between"} p-4 border-b border-gray-700`}>
+          {!isCollapsed && (
+            <span className="text-xl font-bold text-white text-nowrap">
+              Sama Institute
+            </span>
+          )}
+          {/* Hamburger/Collapse Icon */}
           <button
-            onClick={() => setSidebarOpen(false)}
-            className="lg:hidden text-gray-400 hover:text-white"
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="hidden lg:flex w-[38px] h-[38px] items-center justify-center rounded-full text-gray-400 hover:bg-gray-700 hover:text-white"
+            aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
-            <i className="ri-close-line text-2xl"></i>
+            {isCollapsed ? (
+              <i className="ri-menu-line text-xl"></i>
+            ) : (
+              <i className="ri-close-line text-xl"></i>
+            )}
+          </button>
+          <button
+            onClick={() => setIsOpen(false)}
+            className="lg:hidden p-2 rounded-full text-gray-400 hover:bg-gray-700 hover:text-white"
+            aria-label="Close sidebar"
+          >
+            <i className="ri-close-line text-xl"></i>
           </button>
         </div>
 
-        <nav className="flex-1 space-y-1">
-          {navLinks.map((link) => (
-            <SidebarLink
-              key={link.text}
-              to={link.to}
-              icon={link.icon}
-              end={link.end}
-              text={link.text}
-            />
-          ))}
+        <nav className="flex-1 px-2 py-4 space-y-1">
+          {navLinks.map((link) => {
+            const linkClasses = ({ isActive }) =>
+              `group relative flex items-center p-3 my-1 rounded-lg transition-colors duration-200 ${
+                isActive
+                  ? "bg-gray-700 text-white"
+                  : "text-gray-300 hover:bg-gray-600 hover:text-white"
+              } ${isCollapsed ? "justify-center" : ""}`;
+
+            return (
+              <NavLink key={link.to} to={link.to} className={linkClasses}>
+                <div className="relative flex items-center">
+                  {link.icon}
+                  {/* Show text only if not collapsed */}
+                  {!isCollapsed && (
+                    <span className="ml-3 text-sm text-nowrap">
+                      {link.text}
+                    </span>
+                  )}
+                  {/* Show tooltip on hover when collapsed */}
+                  {isCollapsed && (
+                    <div className="absolute left-full ml-8 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap text-nowrap">
+                      {link.text}
+                    </div>
+                  )}
+                </div>
+              </NavLink>
+            );
+          })}
         </nav>
 
-        <div className="mt-auto">
+        <div className="px-2 py-4 border-t border-gray-700">
           <a
             href="/logout"
-            className="bg-gray-700 text-red-500 flex items-center px-4 py-3 rounded-md transition-colors duration-200 text-sm sm:text-base"
+            className={`group relative flex items-center p-3 my-1 rounded-lg transition-colors duration-200 bg-gray-700/50 text-red-400 hover:bg-gray-700 ${
+              isCollapsed ? "justify-center" : ""
+            }`}
           >
             <i className="ri-logout-box-r-line"></i>
-            <span className="mx-4 font-medium">Logout</span>
+            {!isCollapsed && (
+              <span className="ml-3 text-sm font-medium">Logout</span>
+            )}
+            {isCollapsed && (
+              <div className="absolute left-full ml-4 px-2 py-1 bg-black text-white text-xs rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                Logout
+              </div>
+            )}
           </a>
         </div>
-      </div>
+      </aside>
     </>
   );
 };

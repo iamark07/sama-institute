@@ -5,24 +5,23 @@ import Header from "../../../components/dashboardComponents/Header.jsx";
 import { studentData } from "../student-data/StudentData.jsx";
 
 const StudentLayout = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  // State for desktop sidebar collapse
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
     <div className="bg-gray-50 ">
       <div className="container max-w-[2000px] mx-auto relative flex min-h-screen">
-        <img
-          src="/assets/img/bg-img/bg-4.jpg"
-          className="w-full h-full object-cover absolute top-0 left-0 opacity-10"
-          alt="background"
-        />
         <Sidebar
-          sidebarOpen={sidebarOpen}
-          setSidebarOpen={setSidebarOpen}
+          isOpen={isMobileOpen}
+          setIsOpen={setIsMobileOpen}
           userRole={studentData.role}
+          isCollapsed={isCollapsed}
+          setIsCollapsed={setIsCollapsed}
         />
 
-        <div className="w-full flex flex-col relative z-10">
-          <Header setSidebarOpen={setSidebarOpen} />
+        <div className="w-full flex flex-col relative">
+          <Header setSidebarOpen={setIsMobileOpen} />
           <main className="w-full">
             {/* Child routes will be rendered here and can access the context */}
             <Outlet context={{ studentData }} />

@@ -2,7 +2,7 @@ import React from "react";
 
 const Header = ({ setSidebarOpen }) => {
   return (
-    <header className="sticky top-0 lg:hidden bg-gray-800 shadow-md z-[99998]">
+    <header className="sticky top-0 lg:hidden bg-gray-800 shadow-md z-[998]">
       <div className="container mx-auto flex items-center justify-between px-5 py-5">
         {/* Left: Logo */}
         <div className="flex items-center">
@@ -19,7 +19,7 @@ const Header = ({ setSidebarOpen }) => {
         {/* Right: Menu Icon */}
         <div className="flex items-center">
           <button
-            onClick={() => setSidebarOpen(true)}
+            onClick={() => setSidebarOpen((change) => !change)}
             className="text-gray-200 focus:outline-none xl:hidden"
           >
             <i className="ri-menu-line text-2xl"></i>
