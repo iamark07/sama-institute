@@ -47,7 +47,7 @@ const OrganizationLayout = () => {
         </header>
 
         {/* Main Content */}
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto h-full">
           {/* Outlet will render the active child route, e.g., OrganizationRegistration */}
           <Outlet />
         </main>

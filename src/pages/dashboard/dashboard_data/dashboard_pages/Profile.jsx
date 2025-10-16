@@ -137,13 +137,9 @@ const Profile = () => {
   }));
 
   return (
-    <div className="w-full min-h-screen bg-white pb-8 relative">
+    <div className="w-full min-h-screen bg-white relative">
       {/* Profile Header */}
-      <img
-        src="/assets/img/bg-img/bg-4.jpg"
-        alt="background"
-        className="w-full h-full object-cover absolute top-0 left-0 opacity-10"
-      />
+
       <div className="w-full relative py-8">
         <img
           src="/assets/img/bg-img/bg-5.jpg"
@@ -200,157 +196,82 @@ const Profile = () => {
       </div>
 
       {/* Details Grid */}
-      <div className="w-full md:px-10 grid 2xl:grid-cols-2 gap-6 relative z-10 mt-8">
-        <div>
-          {/* Personal Details */}
-          <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
-            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-              <h3 className="text-sm md:text-base font-[650] text-gray-800">
-                Personal Details
-              </h3>
-              <button
-                onClick={() =>
-                  setEditingSection(
-                    isSectionEditing("personal") ? null : "personal"
-                  )
-                }
-                className="text-blue-600 hover:text-blue-800"
-                title="Edit Personal Details"
-              >
-                <i className="ri-pencil-line text-lg"></i>
-              </button>
-            </div>
-
-            <table className="w-full text-sm">
-              <tbody>
-                {personalFields.map((field, idx) => (
-                  <tr
-                    key={field.name}
-                    className={
-                      idx !== personalFields.length - 1
-                        ? "border-b border-gray-200"
-                        : ""
-                    }
-                  >
-                    <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-sm">
-                      {field.label}
-                    </td>
-                    <td className="font-[500] text-gray-700">
-                      <input
-                        type="text"
-                        name={field.name}
-                        value={
-                          isSectionEditing("personal")
-                            ? editData.personalInfo[field.name] ??
-                              editData[field.name] ??
-                              ""
-                            : field.value
-                        }
-                        readOnly={!isSectionEditing("personal")}
-                        onChange={(e) =>
-                          setEditData({
-                            ...editData,
-                            personalInfo: {
-                              ...editData.personalInfo,
-                              [e.target.name]: e.target.value,
-                            },
-                          })
-                        }
-                        className={`w-full border-l px-6 py-4 text-[10px] md:text-sm focus:outline-none ${
-                          isSectionEditing("personal")
-                            ? "border-gray-200 bg-white"
-                            : "border-transparent bg-transparent cursor-default"
-                        }`}
-                        ref={idx === 0 ? personalRef : null}
-                      />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            {isSectionEditing("personal") && (
-              <div className="px-6 py-3 border-t border-gray-200 bg-[#fcfcfc] flex justify-end gap-3">
+      <div className="w-full relative">
+        <img
+          src="/assets/img/bg-img/bg-4.jpg"
+          alt="background"
+          className="w-full h-full object-cover absolute top-0 left-0 opacity-20 grayscale-100"
+        />
+        <div className="w-full md:px-10 grid 2xl:grid-cols-2 gap-6 relative z-10 mt-8">
+          <div>
+            {/* Personal Details */}
+            <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
+              <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
+                <h3 className="text-sm md:text-base font-[650] text-gray-800">
+                  Personal Details
+                </h3>
                 <button
-                  onClick={handleCancel}
-                  className="text-xs md:text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
+                  onClick={() =>
+                    setEditingSection(
+                      isSectionEditing("personal") ? null : "personal"
+                    )
+                  }
+                  className="text-blue-600 hover:text-blue-800"
+                  title="Edit Personal Details"
                 >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => handleSave("personal")}
-                  className="text-xs md:text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
-                >
-                  Save
+                  <i className="ri-pencil-line text-lg"></i>
                 </button>
               </div>
-            )}
-          </div>
-          {/* Security Settings */}
-          <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
-            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-              <h3 className="text-sm md:text-base font-[650] text-gray-800">
-                Security Settings
-              </h3>
-              <button
-                onClick={() =>
-                  setEditingSection(
-                    isSectionEditing("security") ? null : "security"
-                  )
-                }
-                className="text-blue-600 hover:text-blue-800"
-                title="Change Password"
-              >
-                <i className="ri-pencil-line text-lg"></i>
-              </button>
-            </div>
-            <table className="w-full text-sm">
-              <tbody>
-                <tr className="border-b border-gray-200">
-                  <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-sm">
-                    Password
-                  </td>
-                  <td className="font-[500] text-gray-700">
-                    <input
-                      type="password"
-                      name="password"
-                      value={
-                        isSectionEditing("security") ? "" : user.password
+
+              <table className="w-full text-sm">
+                <tbody>
+                  {personalFields.map((field, idx) => (
+                    <tr
+                      key={field.name}
+                      className={
+                        idx !== personalFields.length - 1
+                          ? "border-b border-gray-200"
+                          : ""
                       }
-                      readOnly={!isSectionEditing("security")}
-                      placeholder={isSectionEditing("security") ? "Current Password" : ""}
-                      className={`w-full border-l px-6 py-4 text-[10px] md:text-sm focus:outline-none ${
-                        isSectionEditing("security") ? "border-gray-200 bg-white" : "border-transparent bg-transparent cursor-default"
-                      }`}
-                      ref={securityRef}
-                    />
-                  </td>
-                </tr>
-                {isSectionEditing("security") && (
-                  <tr>
-                    <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-sm">
-                      New Password
-                    </td>
-                    <td className="font-[500] text-gray-700">
-                      <input
-                        type="password"
-                        name="newPassword"
-                        placeholder="New Password"
-                        className="border-l border-gray-200 px-6 py-4 text-[10px] md:text-sm w-full focus:outline-none"
-                      />
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-            {isSectionEditing("security") && (
-              <div className="px-6 py-3 border-t border-gray-200 bg-[#fcfcfc] flex justify-between items-center gap-3">
-                <Link
-                  to="/forgot-password"
-                  className="text-[10px] md:text-xs text-blue-600 hover:underline"
-                >
-                  Forgot Password?
-                </Link>
-                <div className="flex gap-3">
+                    >
+                      <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-sm">
+                        {field.label}
+                      </td>
+                      <td className="font-[500] text-gray-700">
+                        <input
+                          type="text"
+                          name={field.name}
+                          value={
+                            isSectionEditing("personal")
+                              ? editData.personalInfo[field.name] ??
+                                editData[field.name] ??
+                                ""
+                              : field.value
+                          }
+                          readOnly={!isSectionEditing("personal")}
+                          onChange={(e) =>
+                            setEditData({
+                              ...editData,
+                              personalInfo: {
+                                ...editData.personalInfo,
+                                [e.target.name]: e.target.value,
+                              },
+                            })
+                          }
+                          className={`w-full border-l px-6 py-4 text-[10px] md:text-sm focus:outline-none ${
+                            isSectionEditing("personal")
+                              ? "border-gray-200 bg-white"
+                              : "border-transparent bg-transparent cursor-default"
+                          }`}
+                          ref={idx === 0 ? personalRef : null}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {isSectionEditing("personal") && (
+                <div className="px-6 py-3 border-t border-gray-200 bg-[#fcfcfc] flex justify-end gap-3">
                   <button
                     onClick={handleCancel}
                     className="text-xs md:text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
@@ -358,176 +279,267 @@ const Profile = () => {
                     Cancel
                   </button>
                   <button
-                    onClick={() => handleSave("security")}
+                    onClick={() => handleSave("personal")}
                     className="text-xs md:text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
                   >
                     Save
                   </button>
                 </div>
-              </div>
-            )}
-          </div>
-        </div>
-        <div>
-          {/* Academic Details */}
-          <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
-            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-              <h3 className="text-sm md:text-base font-[650] text-gray-800">
-                Academic Details
-              </h3>
-              <button
-                onClick={() =>
-                  setEditingSection(
-                    isSectionEditing("academic") ? null : "academic"
-                  )
-                }
-                className="text-blue-600 hover:text-blue-800"
-                title="Edit Academic Details"
-              >
-                <i className="ri-pencil-line text-lg"></i>
-              </button>
+              )}
             </div>
-            <table className="w-full text-sm">
-              <tbody>
-                {academicFields.map((field, idx) => (
-                  <tr
-                    key={field.name}
-                    className={
-                      idx !== academicFields.length - 1
-                        ? "border-b border-gray-200"
-                        : ""
-                    }
-                  >
+            {/* Security Settings */}
+            <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
+              <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
+                <h3 className="text-sm md:text-base font-[650] text-gray-800">
+                  Security Settings
+                </h3>
+                <button
+                  onClick={() =>
+                    setEditingSection(
+                      isSectionEditing("security") ? null : "security"
+                    )
+                  }
+                  className="text-blue-600 hover:text-blue-800"
+                  title="Change Password"
+                >
+                  <i className="ri-pencil-line text-lg"></i>
+                </button>
+              </div>
+              <table className="w-full text-sm">
+                <tbody>
+                  <tr className="border-b border-gray-200">
                     <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-sm">
-                      {field.label}
+                      Password
                     </td>
                     <td className="font-[500] text-gray-700">
                       <input
-                        type="text"
-                        name={field.name}
+                        type="password"
+                        name="password"
                         value={
-                          isSectionEditing("academic")
-                            ? editData.academicInfo[field.name] || ""
-                            : field.value
+                          isSectionEditing("security") ? "" : user.password
                         }
-                        readOnly={!isSectionEditing("academic")}
-                        onChange={(e) =>
-                          setEditData({
-                            ...editData,
-                            academicInfo: {
-                              ...editData.academicInfo,
-                              [field.name]: e.target.value,
-                            },
-                          })
+                        readOnly={!isSectionEditing("security")}
+                        placeholder={
+                          isSectionEditing("security") ? "Current Password" : ""
                         }
                         className={`w-full border-l px-6 py-4 text-[10px] md:text-sm focus:outline-none ${
-                          isSectionEditing("academic")
+                          isSectionEditing("security")
                             ? "border-gray-200 bg-white"
                             : "border-transparent bg-transparent cursor-default"
                         }`}
-                        ref={idx === 0 ? academicRef : null}
+                        ref={securityRef}
                       />
                     </td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-            {isSectionEditing("academic") && (
-              <div className="px-6 py-3 border-t border-gray-200 bg-gray-[#fcfcfc] flex justify-end gap-3">
+                  {isSectionEditing("security") && (
+                    <tr>
+                      <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-sm">
+                        New Password
+                      </td>
+                      <td className="font-[500] text-gray-700">
+                        <input
+                          type="password"
+                          name="newPassword"
+                          placeholder="New Password"
+                          className="border-l border-gray-200 px-6 py-4 text-[10px] md:text-sm w-full focus:outline-none"
+                        />
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+              {isSectionEditing("security") && (
+                <div className="px-6 py-3 border-t border-gray-200 bg-[#fcfcfc] flex justify-between items-center gap-3">
+                  <Link
+                    to="/forgot-password"
+                    className="text-[10px] md:text-xs text-blue-600 hover:underline"
+                  >
+                    Forgot Password?
+                  </Link>
+                  <div className="flex gap-3">
+                    <button
+                      onClick={handleCancel}
+                      className="text-xs md:text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={() => handleSave("security")}
+                      className="text-xs md:text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+          <div>
+            {/* Academic Details */}
+            <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
+              <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
+                <h3 className="text-sm md:text-base font-[650] text-gray-800">
+                  Academic Details
+                </h3>
                 <button
-                  onClick={handleCancel}
-                  className="text-xs md:text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
+                  onClick={() =>
+                    setEditingSection(
+                      isSectionEditing("academic") ? null : "academic"
+                    )
+                  }
+                  className="text-blue-600 hover:text-blue-800"
+                  title="Edit Academic Details"
                 >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => handleSave("academic")}
-                  className="text-xs md:text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
-                >
-                  Save
+                  <i className="ri-pencil-line text-lg"></i>
                 </button>
               </div>
-            )}
-          </div>
-          {/* Parent Details */}
-          <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
-            <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
-              <h3 className="text-sm md:text-base font-[650] text-gray-800">
-                Parent's Information
-              </h3>
-              <button
-                onClick={() =>
-                  setEditingSection(
-                    isSectionEditing("parent") ? null : "parent"
-                  )
-                }
-                className="text-blue-600 hover:text-blue-800"
-                title="Edit Parent's Information"
-              >
-                <i className="ri-pencil-line text-lg"></i>
-              </button>
-            </div>
-            <table className="w-full text-sm">
-              <tbody>
-                {user.parents.map((p, i) => (
-                  <tr
-                    key={i}
-                    className={
-                      i !== user.parents.length - 1
-                        ? "border-b border-gray-200"
-                        : ""
-                    }
-                  >
-                    <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-sm">
-                      {p.relation}
-                    </td>
-                    <td className="font-[500] text-gray-700">
-                      <div className="flex items-center gap-3">
+              <table className="w-full text-sm">
+                <tbody>
+                  {academicFields.map((field, idx) => (
+                    <tr
+                      key={field.name}
+                      className={
+                        idx !== academicFields.length - 1
+                          ? "border-b border-gray-200"
+                          : ""
+                      }
+                    >
+                      <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-sm">
+                        {field.label}
+                      </td>
+                      <td className="font-[500] text-gray-700">
                         <input
                           type="text"
+                          name={field.name}
                           value={
-                            isSectionEditing("parent")
-                              ? editData.parents?.[i]?.name || p.name
-                              : p.name
+                            isSectionEditing("academic")
+                              ? editData.academicInfo[field.name] || ""
+                              : field.value
                           }
-                          readOnly={!isSectionEditing("parent")}
-                          onChange={(e) => {
-                            const updatedParents = [
-                              ...(editData.parents || user.parents),
-                            ];
-                            updatedParents[i] = {
-                              ...updatedParents[i],
-                              name: e.target.value,
-                            };
-                            setEditData({ ...editData, parents: updatedParents });
-                          }}
+                          readOnly={!isSectionEditing("academic")}
+                          onChange={(e) =>
+                            setEditData({
+                              ...editData,
+                              academicInfo: {
+                                ...editData.academicInfo,
+                                [field.name]: e.target.value,
+                              },
+                            })
+                          }
                           className={`w-full border-l px-6 py-4 text-[10px] md:text-sm focus:outline-none ${
-                            isSectionEditing("parent") ? "border-gray-200 bg-white" : "border-transparent bg-transparent cursor-default"
+                            isSectionEditing("academic")
+                              ? "border-gray-200 bg-white"
+                              : "border-transparent bg-transparent cursor-default"
                           }`}
-                          ref={i === 0 ? parentRef : null}
+                          ref={idx === 0 ? academicRef : null}
                         />
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            {isSectionEditing("parent") && (
-              <div className="px-6 py-3 border-t border-gray-200 bg-[#fcfcfc] flex justify-end gap-3">
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {isSectionEditing("academic") && (
+                <div className="px-6 py-3 border-t border-gray-200 bg-gray-[#fcfcfc] flex justify-end gap-3">
+                  <button
+                    onClick={handleCancel}
+                    className="text-xs md:text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={() => handleSave("academic")}
+                    className="text-xs md:text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
+                  >
+                    Save
+                  </button>
+                </div>
+              )}
+            </div>
+            {/* Parent Details */}
+            <div className="bg-white rounded-md border border-gray-200 p-0 overflow-hidden mb-6">
+              <div className="flex justify-between items-center px-6 py-4 border-b border-gray-200">
+                <h3 className="text-sm md:text-base font-[650] text-gray-800">
+                  Parent's Information
+                </h3>
                 <button
-                  onClick={handleCancel}
-                  className="text-xs md:text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
+                  onClick={() =>
+                    setEditingSection(
+                      isSectionEditing("parent") ? null : "parent"
+                    )
+                  }
+                  className="text-blue-600 hover:text-blue-800"
+                  title="Edit Parent's Information"
                 >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => handleSave("parent")}
-                  className="text-xs md:text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
-                >
-                  Save
+                  <i className="ri-pencil-line text-lg"></i>
                 </button>
               </div>
-            )}
+              <table className="w-full text-sm">
+                <tbody>
+                  {user.parents.map((p, i) => (
+                    <tr
+                      key={i}
+                      className={
+                        i !== user.parents.length - 1
+                          ? "border-b border-gray-200"
+                          : ""
+                      }
+                    >
+                      <td className="py-4 px-6 text-gray-500 w-2/5 md:w-1/3 text-[10px] md:text-sm">
+                        {p.relation}
+                      </td>
+                      <td className="font-[500] text-gray-700">
+                        <div className="flex items-center gap-3">
+                          <input
+                            type="text"
+                            value={
+                              isSectionEditing("parent")
+                                ? editData.parents?.[i]?.name || p.name
+                                : p.name
+                            }
+                            readOnly={!isSectionEditing("parent")}
+                            onChange={(e) => {
+                              const updatedParents = [
+                                ...(editData.parents || user.parents),
+                              ];
+                              updatedParents[i] = {
+                                ...updatedParents[i],
+                                name: e.target.value,
+                              };
+                              setEditData({
+                                ...editData,
+                                parents: updatedParents,
+                              });
+                            }}
+                            className={`w-full border-l px-6 py-4 text-[10px] md:text-sm focus:outline-none ${
+                              isSectionEditing("parent")
+                                ? "border-gray-200 bg-white"
+                                : "border-transparent bg-transparent cursor-default"
+                            }`}
+                            ref={i === 0 ? parentRef : null}
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {isSectionEditing("parent") && (
+                <div className="px-6 py-3 border-t border-gray-200 bg-[#fcfcfc] flex justify-end gap-3">
+                  <button
+                    onClick={handleCancel}
+                    className="text-xs md:text-sm text-gray-600 hover:text-gray-800 font-medium px-4 py-1.5 rounded-md"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    onClick={() => handleSave("parent")}
+                    className="text-xs md:text-sm bg-blue-600 text-white font-medium px-4 py-1.5 rounded-md hover:bg-blue-700"
+                  >
+                    Save
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>

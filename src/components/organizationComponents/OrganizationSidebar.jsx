@@ -13,21 +13,25 @@ const OrganizationSidebar = ({
   const navItems = [
     {
       to: "/org-dashboard",
+      to: "/organization/dashboard",
       icon: <i className="ri-dashboard-line text-blue-400"></i>,
       text: "Dashboard",
     },
     {
       to: "/org-registration",
+      to: "/organization/register",
       icon: <i className="ri-building-4-line text-green-400"></i>,
       text: "Register Organization",
     },
     {
       to: "/org-list",
+      to: "/organization/list",
       icon: <i className="ri-file-list-line text-yellow-400"></i>,
       text: "Organization List",
     },
     {
       to: "/org-profile",
+      to: "/organization/profile",
       icon: <i className="ri-user-line text-purple-400"></i>,
       text: "Organization Profile",
     },
@@ -38,6 +42,7 @@ const OrganizationSidebar = ({
     },
     {
       to: "/org-settings",
+      to: "/organization/settings",
       icon: <i className="ri-settings-3-line text-indigo-400"></i>,
       text: "Settings",
     },
