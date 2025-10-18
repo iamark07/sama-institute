@@ -1,8 +1,8 @@
 import React from "react";
-import { useOutletContext } from "react-router-dom";
 
-const Dashboard = () => {
-  const { studentData: user } = useOutletContext();
+const Dashboard = ({ studentData }) => {
+  // Rename for easier use in the component
+  const user = studentData;
 
   return (
     <div className="w-full relative">

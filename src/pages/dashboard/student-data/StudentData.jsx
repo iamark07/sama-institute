@@ -1,7 +1,7 @@
 // This object holds all the information for a single student.
 // Exporting it allows us to import and use this data in any component.
 export const studentData = {
-  role: "student",
+  role: "brandUser",
   id: "UNI - 2456826",
   name: "Shubham Ray",
   number: "+91 6325343125",

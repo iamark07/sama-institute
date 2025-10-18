@@ -2,13 +2,17 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Login() {
+  // These "useState" hooks create state variables to hold the form data.
+  // They will update whenever the user types into the input fields.
   const [emailOrMobile, setEmailOrMobile] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  // This function runs when the user clicks the "Login" button.
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Login logic will be added later
+    // For now, it just shows the entered data in the browser's console.
+    // Later, this is where you'll add the actual login logic.
     console.log("Login attempt with:", { emailOrMobile, password });
   };
 
@@ -23,11 +27,14 @@ function Login() {
         <div className="w-full max-w-7xl bg-white border border-gray-200 flex overflow-hidden">
           {/* Left Side Form */}
           <div className="flex-1 flex flex-col justify-center px-6 py-20 md:px-10 lg:px-16">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800">
+            <div className="text-center mb-8 space-y-2">
+              {/* <h1 className="text-2xl font-bold text-green-600">
+                RAPM'S Groups
+              </h1> */}
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900">
                 Welcome Back!
               </h2>
-              <p className="text-gray-500 mt-1 text-sm md:text-base">Please sign in to continue</p>
+              <p className="text-gray-500 text-sm md:text-base">Please sign in to continue</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-5">
@@ -79,7 +86,7 @@ function Login() {
               </div>
               <div className="text-right">
                 <Link
-                  to="/forgot-password"
+                  to="/forget-password"
                   className="text-blue-600 text-xs md:text-sm hover:underline font-medium"
                 >
                   Forgot Password?
@@ -87,19 +94,18 @@ function Login() {
               </div>
               <button
                 type="submit"
-                className="cursor-pointer text-sm md:text-base w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition shadow-md"
+                className="hidden cursor-pointer text-sm md:text-base w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition shadow-md"
               >
                 Login
               </button>
-              <div className="mt-6 text-center text-xs md:text-sm text-gray-500">
-                Don't have an account?{" "}
+              <button className="w-full">
                 <Link
-                  to="/register"
-                  className="text-blue-600 hover:underline font-medium"
+                  to="/dashboard"
+                  className="cursor-pointer text-sm md:text-base w-full inline-block bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition shadow-md"
                 >
-                  Register Now
+                  Login
                 </Link>
-              </div>
+              </button>
             </form>
           </div>
           {/* Right Side Image */}

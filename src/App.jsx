@@ -1,12 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './pages/Login';
+
+// auth Pages
+import Login from './pages/auth/Login';
+import ForgotPassword from './pages/auth/ForgotPassword';
+import ResetPassword from './pages/auth/ResetPassword';
 import Register from './pages/Register';
-import Home from './pages/Home';
-import OrganizationRegistration from './pages/organization/organization-pages/OrganizationRegistration';
 
 // Layout
-import StudentLayout from './pages/dashboard/dashboard_data/StudentLayout';
+import Home from './pages/Home';
+import OrganizationRegistration from './pages/organization/organization-pages/OrganizationRegistration';
+import DashboardLayout from './pages/dashboard/dashboard_data/DashboardLayout';
 
 // Organization Layout
 import OrganizationLayout from './pages/organization/OrganizationLayout';
@@ -15,17 +19,23 @@ import OrganizationLayout from './pages/organization/OrganizationLayout';
 import Dashboard from './pages/dashboard/dashboard_data/dashboard_pages/Dashboard';
 import Profile from './pages/dashboard/dashboard_data/dashboard_pages/Profile';
 
+
 function App() {
   return (
     <Router>
       <Routes>
+        {/* auth pages */}
         <Route path="/" element={<Login />} />
+        <Route path="/forget-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        {/* auth pages end */}
+
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />
 
-        {/* StudentLayout wraps all pages under the student dashboard */}
-        <Route element={<StudentLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+        {/* DashboardLayout wraps all pages under the dashboard */}
+        <Route element={<DashboardLayout />}>
+          <Route path="/dashboard" element={<div />} /> {/* This will be handled by the layout */}
           <Route path="/profile" element={<Profile />} />
         </Route>
 
