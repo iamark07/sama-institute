@@ -1,7 +1,7 @@
 // This object holds all the data for the Admin dashboard.
 // Exporting it allows us to import and use this data in any component.
 export const adminDashboardData = {
-  role: "brandUsers", // The role of the current user
+  // role: "admin", // The role of the current user
 
   // Overview of all brands managed in the system
   brandsOverview: {

@@ -10,14 +10,13 @@ import Register from './pages/Register';
 // Layout
 import Home from './pages/Home';
 import OrganizationRegistration from './pages/organization/organization-pages/OrganizationRegistration';
-import DashboardLayout from './pages/dashboard/dashboard_data/DashboardLayout';
+import DashboardLayout from './pages/dashboard/DashboardLayout';
 
 // Organization Layout
 import OrganizationLayout from './pages/organization/OrganizationLayout';
 
 // Pages
-import Dashboard from './pages/dashboard/dashboard_data/dashboard_pages/Dashboard';
-import Profile from './pages/dashboard/dashboard_data/dashboard_pages/Profile';
+import Profile from './pages/dashboard/dashboard_pages/Profile';
 
 
 function App() {
