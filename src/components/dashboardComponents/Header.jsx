@@ -1,8 +1,8 @@
 import React from "react";
 
-const Header = ({ setSidebarOpen }) => {
+const Header = ({ setSidebarOpen, displayName }) => {
   return (
-    <header className="sticky top-0 lg:hidden bg-gray-800 shadow-md z-[998]">
+    <header className="sticky top-0 xl:hidden bg-gray-800 shadow-md z-[998]">
       <div className="container mx-auto flex items-center justify-between px-5 py-5">
         {/* Left: Logo */}
         <div className="flex items-center">
@@ -11,9 +11,7 @@ const Header = ({ setSidebarOpen }) => {
             alt="Logo"
             className="h-8 w-auto hidden"
           />
-          <span className="text-xl font-bold text-white">
-            Sama Institute
-          </span>
+          <span className="text-xl font-bold text-white">{displayName}</span>
         </div>
 
         {/* Right: Menu Icon */}

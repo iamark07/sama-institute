@@ -17,6 +17,6 @@ button{
 
 /* dashboard.jsx table scroll hide */
 
-.table-scroll::-webkit-scrollbar {
+/* .table-scroll::-webkit-scrollbar {
   display: none;
-}
+} */

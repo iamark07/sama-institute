@@ -3,10 +3,10 @@ import { Outlet, useLocation } from "react-router-dom";
 import Sidebar from "../../components/dashboardComponents/Sidebar.jsx";
 import Header from "../../components/dashboardComponents/Header.jsx";
 import { currentUser } from "./API_Data.jsx"; // Import from the new common file
-import { adminDashboardData } from "./admin/adminData.jsx";
-import { studentData } from "./student-data/StudentData.jsx"; // This is still needed for the student dashboard component
-import Admin_Dashboard from "./admin/admin_pages/Admin_Dashboard.jsx";
-import Dashboard from "./dashboard_pages/Dashboard.jsx";
+import { adminDashboardData } from "./admin/AdminData.jsx";
+import { brandDashboardData } from "./brands/BrandData.jsx";
+import Admin_Dashboard from "./admin/admin_pages/AdminDashboard.jsx";
+import BrandDashboard from "./brands/brands-pages/BrandDashboard.jsx";
 
 const DashboardLayout = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -18,28 +18,34 @@ const DashboardLayout = () => {
 
   const location = useLocation();
 
+  // Determine the display name based on the role
+  const displayName = isAdmin
+    ? adminDashboardData.adminProfile.name
+    : brandDashboardData.brandProfile.name;
+
   return (
     <div className="bg-gray-50 ">
-      <div className="container max-w-[2000px] mx-auto relative flex min-h-screen">
+      <div className="container max-w-[2000px] w-full mx-auto relative flex min-h-screen">
         <Sidebar
           isOpen={isMobileOpen}
           setIsOpen={setIsMobileOpen}
           userRole={userRole}
           isCollapsed={isCollapsed}
           setIsCollapsed={setIsCollapsed}
+          displayName={displayName}
         />
 
         <div className="w-full flex flex-col relative">
-          <Header setSidebarOpen={setIsMobileOpen} />
+          <Header setSidebarOpen={setIsMobileOpen} displayName={displayName} />
           <main className="w-full">
             {location.pathname === "/dashboard" ? (
               isAdmin ? (
-                <Admin_Dashboard adminDashboardData={adminDashboardData} />
+                <Admin_Dashboard adminDashboardData={adminDashboardData} displayName={displayName}/>
               ) : (
-                <Dashboard studentData={studentData} />
+                <BrandDashboard brandDashboardData={brandDashboardData} displayName={displayName}/>
               )
             ) : (
-              <Outlet context={{ adminDashboardData, studentData }} />
+              <Outlet context={{ adminDashboardData, brandDashboardData }} />
             )}
           </main>
         </div>

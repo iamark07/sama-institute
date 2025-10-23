@@ -17,6 +17,8 @@ import OrganizationLayout from './pages/organization/OrganizationLayout';
 
 // Pages
 import Profile from './pages/dashboard/dashboard_pages/Profile';
+import AddStaff from './pages/dashboard/brands/brands-pages/brands-dashboard-pages/AddStaff';
+import AddBrands from './pages/dashboard/admin/admin_pages/admin-dashboard-pages/AddBrands';
 
 
 function App() {
@@ -36,6 +38,8 @@ function App() {
         <Route element={<DashboardLayout />}>
           <Route path="/dashboard" element={<div />} /> {/* This will be handled by the layout */}
           <Route path="/profile" element={<Profile />} />
+          <Route path="/staff/add" element={<AddStaff />} />
+          <Route path="/brands/add" element={<AddBrands />} />
         </Route>
 
         {/* OrganizationLayout wraps all pages under the organization*/}

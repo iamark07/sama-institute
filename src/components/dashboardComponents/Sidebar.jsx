@@ -7,7 +7,8 @@ const Sidebar = ({
   setIsOpen,
   isCollapsed,
   setIsCollapsed,
-  userRole, // This prop will be 'superAdmin' or 'brandUser'
+  userRole, // This prop will be 'Admin' or 'brandUser'
+  displayName,
 }) => {
   // Define the links for a Super Admin.
   const adminLinks = [
@@ -86,35 +87,33 @@ const Sidebar = ({
 
   // Choose which set of links to display based on the user's role.
   const navLinks = userRole === "admin" ? adminLinks : brandUserLinks;
-  const brandName = userRole === "admin" ? "RAPMS Groups" : "Brand Name";
 
   return (
     <>
       {/* Mobile overlay */}
       <div
-        className={`fixed inset-0 bg-black/60 z-30 lg:hidden ${isOpen ? "block" : "hidden"
+        className={`fixed inset-0 bg-black/60 z-30 xl:hidden ${isOpen ? "block" : "hidden"
           }`}
         onClick={() => setIsOpen(false)}
       ></div>
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:sticky top-0 h-[100dvh] bg-gray-800 text-white flex flex-col !z-[999] transition-all duration-300 lg:transition-none lg:duration-initial ${isOpen ? "translate-x-0" : "-translate-x-full"
-          } lg:translate-x-0 lg:relative ${isCollapsed ? "min-w-20" : "min-w-64"
+        className={`fixed xl:sticky top-0 h-[100dvh] bg-gray-800 text-white flex flex-col !z-[999] transition-all duration-300 xl:transition-none xl:duration-initial ${isOpen ? "translate-x-0" : "-translate-x-full"
+          } xl:translate-x-0 xl:relative ${isCollapsed ? "min-w-20" : "min-w-64"
           }`}
       >
         {/* Header Section */}
         <div className={`flex items-center ${isCollapsed ? "justify-center" : "justify-between"} p-4 border-b border-gray-700`}>
           {!isCollapsed && (
             <div className="flex flex-col text-nowrap">
-              <span className="text-xl font-bold text-white">{brandName}</span>
-              <span className="text-xs text-gray-400 capitalize">{userRole} Panel</span>
+              <span className="text-lg font-bold text-white">{displayName}</span>
             </div>
           )}
           {/* Hamburger/Collapse Icon */}
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="hidden lg:flex w-[38px] h-[38px] items-center justify-center rounded-full text-gray-400 hover:bg-gray-700 hover:text-white"
+            className="hidden xl:flex w-[38px] h-[38px] items-center justify-center rounded-full text-gray-400 hover:bg-gray-700 hover:text-white"
             aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
           >
             {isCollapsed ? (
@@ -125,7 +124,7 @@ const Sidebar = ({
           </button>
           <button
             onClick={() => setIsOpen(false)}
-            className="lg:hidden p-2 rounded-full text-gray-400 hover:bg-gray-700 hover:text-white"
+            className="xl:hidden p-2 rounded-full text-gray-400 hover:bg-gray-700 hover:text-white"
             aria-label="Close sidebar"
           >
             <i className="ri-close-line text-xl"></i>

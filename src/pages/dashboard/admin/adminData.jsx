@@ -1,43 +1,65 @@
 // This object holds all the data for the Admin dashboard.
 // Exporting it allows us to import and use this data in any component.
 export const adminDashboardData = {
-  // role: "admin", // The role of the current user
-
+  adminProfile: {
+    name: "Admin",
+    email: "admin@rapms.com",
+    avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+  },
   // Overview of all brands managed in the system
   brandsOverview: {
-    totalBrands: 5,
-    activeBrands: 4,
+    totalBrands: 6,
+    activeBrands: 5,
     inactiveBrands: 1,
+    pendingRequests: 2,
     brands: [
       {
         id: "brand-01",
-        name: "Brand A",
+        name: "Megamart 99",
+        email: "contact@megamart99.com",
         status: "Active",
         creationDate: "2023-10-01",
+        website: "https://megamart99.com",
       },
       {
         id: "brand-02",
-        name: "Brand B",
+        name: "Gridxbazaar",
+        email: "support@gridxbazaar.com",
         status: "Inactive",
         creationDate: "2023-09-15",
+        website: "https://gridxbazaar.com",
       },
       {
         id: "brand-03",
-        name: "Brand C",
+        name: "Megamart Ventures",
+        email: "info@megamartventures.com",
         status: "Active",
         creationDate: "2023-11-05",
+        website: "https://megamartventures.com",
       },
       {
         id: "brand-04",
-        name: "Brand D",
+        name: "Sasta Kirana",
+        email: "help@sastakirana.co",
         status: "Active",
         creationDate: "2024-01-10",
+        website: "https://sastakirana.co",
       },
       {
         id: "brand-05",
-        name: "Brand E",
+        name: "Rapms360",
+        email: "admin@rapms360.com",
         status: "Active",
         creationDate: "2024-02-20",
+        website: "https://rapms360.com",
+      },
+      {
+        id: "brand-06",
+        name: "Varnika Glam",
+        email: "hello@varnikaglam.in",
+        status: "Active",
+        creationDate: "2024-03-15",
+        website: "https://varnikaglam.in",
       },
     ],
   },
@@ -46,9 +68,12 @@ export const adminDashboardData = {
   usersOverview: {
     totalUsers: 150,
     usersPerBrand: [
-      { brandName: "Brand A", userCount: 50 },
-      { brandName: "Brand B", userCount: 30 },
-      { brandName: "Brand C", userCount: 70 },
+      { brandName: "Megamart 99", userCount: 40 },
+      { brandName: "Gridxbazaar", userCount: 20 },
+      { brandName: "Megamart Ventures", userCount: 35 },
+      { brandName: "Sasta Kirana", userCount: 25 },
+      { brandName: "Rapms360", userCount: 15 },
+      { brandName: "Varnika Glam", userCount: 15 },
     ],
   },
 
@@ -67,23 +92,4 @@ export const adminDashboardData = {
       },
     ],
   },
-
-  // A log of recent activities for the admin to see
-  recentActivities: [
-    {
-      type: "new_brand",
-      description: "Brand D was added to the system.",
-      date: "2024-01-10",
-    },
-    {
-      type: "user_update",
-      description: "John Doe from Brand A updated their profile.",
-      date: "2024-01-09",
-    },
-    {
-      type: "alert",
-      description: "Brand B subscription is expiring soon.",
-      date: "2024-01-08",
-    },
-  ],
 };
