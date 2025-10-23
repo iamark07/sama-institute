@@ -10,7 +10,7 @@ function Home() {
           <Link to="/" className="text-blue-600 hover:underline">Go to Login Page</Link>
         </div>
       </div>
-    </>
+    </> 
   )
 }
 
