@@ -9,11 +9,8 @@ import Register from './pages/Register';
 
 // Layout
 import Home from './pages/Home';
-import OrganizationRegistration from './pages/organization/organization-pages/OrganizationRegistration';
 import DashboardLayout from './pages/dashboard/DashboardLayout';
 
-// Organization Layout
-import OrganizationLayout from './pages/organization/OrganizationLayout';
 
 // Pages
 import Profile from './pages/dashboard/dashboard_pages/Profile';
@@ -40,11 +37,6 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/staff/add" element={<AddStaff />} />
           <Route path="/brands/add" element={<AddBrands />} />
-        </Route>
-
-        {/* OrganizationLayout wraps all pages under the organization*/}
-        <Route element={<OrganizationLayout />}>
-          <Route path="/org-registration" element={<OrganizationRegistration />} />
         </Route>
       </Routes>
     </Router>
