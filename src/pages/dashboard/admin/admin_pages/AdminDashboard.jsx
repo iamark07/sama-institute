@@ -197,7 +197,7 @@ const Admin_Dashboard = ({ adminDashboardData }) => {
                             <button
                               className="bg-blue-400 rounded text-white w-8 h-8 hover:bg-blue-700"
                               title="Edit"
-                            >
+                            > 
                               <i className="ri-pencil-line"></i>
                             </button>
                             <button
