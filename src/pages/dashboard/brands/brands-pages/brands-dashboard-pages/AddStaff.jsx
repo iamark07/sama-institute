@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const AddStaff = () => {
   // Reusable input style consistent with the dashboard theme
   const inputStyle =
-    "w-full pl-11 pr-4 py-3 md:py-3.5 text-sm md:text-base rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition";
+    "w-full pl-11 pr-4 py-3 md:py-3.5 text-xs md:text-base rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition";
 
   return (
     <div className="w-full relative">
@@ -57,7 +57,7 @@ const AddStaff = () => {
                     id="fullName"
                     name="fullName"
                     className={inputStyle}
-                    placeholder="e.g., John Doe"
+                    placeholder="John Doe"
                   />
                 </div>
               </div>
@@ -77,7 +77,7 @@ const AddStaff = () => {
                     id="email"
                     name="email"
                     className={inputStyle}
-                    placeholder="e.g., john.doe@example.com"
+                    placeholder="john.doe@example.com"
                   />
                 </div>
               </div>
@@ -97,7 +97,7 @@ const AddStaff = () => {
                     id="phone"
                     name="phone"
                     className={inputStyle}
-                    placeholder="e.g., +91 98765 43210"
+                    placeholder="+91 98765 43210"
                   />
                 </div>
               </div>
@@ -112,7 +112,8 @@ const AddStaff = () => {
                 </label>
                 <div className="relative">
                   <i className="ri-briefcase-4-line text-gray-400 text-xl absolute left-3 top-1/2 -translate-y-1/2"></i>
-                  <select id="role" name="role" className={`${inputStyle} appearance-none`}>
+                  <select id="role" name="role" className={`${inputStyle} appearance-none`} defaultValue="">
+                    <option value="" disabled>Select Option</option>
                     <option>Manager</option>
                     <option>Cashier</option>
                     <option>Supervisor</option>

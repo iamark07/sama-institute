@@ -7,6 +7,7 @@ import { adminDashboardData } from "./admin/AdminData.jsx";
 import { brandDashboardData } from "./brands/BrandData.jsx";
 import Admin_Dashboard from "./admin/admin_pages/AdminDashboard.jsx";
 import BrandDashboard from "./brands/brands-pages/BrandDashboard.jsx";
+import ManageBrands from "./admin/admin_pages/ManageBrands.jsx";
 
 const DashboardLayout = () => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -47,6 +48,7 @@ const DashboardLayout = () => {
             ) : (
               <Outlet context={{ adminDashboardData, brandDashboardData }} />
             )}
+            
           </main>
         </div>
       </div>

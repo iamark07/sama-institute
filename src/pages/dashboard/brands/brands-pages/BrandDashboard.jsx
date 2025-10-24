@@ -157,7 +157,7 @@ const BrandDashboard = ({ brandDashboardData }) => {
                   <h3 className="md:text-lg font-semibold text-gray-800">
                     Staff Overview
                   </h3>
-                  <Link to="/staff/add">
+                  <Link to="/dashboard/add-staff">
                     <button className="bg-blue-500 text-white font-semibold px-4 py-2.5 rounded-md hover:bg-blue-700 transition-colors flex items-center gap-1.5 text-xs md:text-sm">
                       <i className="ri-add-line"></i>
                       Add <span className="hidden md:block">New Staff</span>

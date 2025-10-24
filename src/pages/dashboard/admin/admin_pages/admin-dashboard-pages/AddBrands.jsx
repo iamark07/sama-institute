@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const AddBrands = () => {
   // Reusable input style consistent with the dashboard theme
   const inputStyle =
-    "w-full pl-11 pr-4 py-3 md:py-3.5 text-sm md:text-base rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition";
+    "w-full pl-11 pr-4 py-3 md:py-3.5 text-xs md:text-base rounded-md border border-gray-300 focus:ring focus:ring-blue-400 outline-none transition ";
 
   return (
     <div className="w-full relative">
@@ -55,7 +55,7 @@ const AddBrands = () => {
                     id="brandName"
                     name="brandName"
                     className={inputStyle}
-                    placeholder="e.g., Glamour Salon"
+                    placeholder="Glamour Salon"
                   />
                 </div>
               </div>
@@ -75,7 +75,7 @@ const AddBrands = () => {
                     id="brandEmail"
                     name="brandEmail"
                     className={inputStyle}
-                    placeholder="e.g., contact@glamour.com"
+                    placeholder="contact@glamour.com"
                   />
                 </div>
               </div>
@@ -95,7 +95,7 @@ const AddBrands = () => {
                     id="contactNumber"
                     name="contactNumber"
                     className={inputStyle}
-                    placeholder="e.g., +91 98765 43210"
+                    placeholder="+91 98765 43210"
                   />
                 </div>
               </div>
@@ -115,7 +115,7 @@ const AddBrands = () => {
                     id="website"
                     name="website"
                     className={inputStyle}
-                    placeholder="e.g., www.glamour.com"
+                    placeholder="www.glamour.com"
                   />
                 </div>
               </div>
@@ -149,7 +149,8 @@ const AddBrands = () => {
                 </label>
                 <div className="relative">
                   <i className="ri-price-tag-3-line text-gray-400 text-xl absolute left-3 top-1/2 -translate-y-1/2"></i>
-                  <select id="brandType" name="brandType" className={`${inputStyle} appearance-none`}>
+                  <select id="brandType" name="brandType" className={`${inputStyle} appearance-none`} defaultValue="">
+                    <option value="" disabled>Select Option</option>
                     <option>Salon</option>
                     <option>Retail</option>
                     <option>Education</option>

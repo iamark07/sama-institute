@@ -16,18 +16,19 @@ const Admin_Dashboard = ({ adminDashboardData }) => {
       <div className="lg:px-0 flex flex-col relative">
         {/* Main Content Grid */}
         <div className="w-full flex flex-col gap-8 py-6 sm:py-10 px-5 sm:px-8 bg-white">
-          <div className="md:hidden flex flex-col lg:flex-row justify-between">
+          <div className="flex flex-col lg:flex-row justify-between">
             <div className="order-2 md:order-1">
               <h2 className="text-2xl font-bold text-gray-800">
                 {data.adminProfile.name} Dashboard
               </h2>
               <p className="text-gray-600 mt-1">
-                Welcome back, {data.adminProfile.name} here’s your daily summary.
+                Welcome back, {data.adminProfile.name} here’s your daily
+                summary.
               </p>
             </div>
             {/* Right: Actions & Profile */}
             <div className="order-1 md:order-2 mb-5">
-            <ProfileAction profile={data.adminProfile} />
+              <ProfileAction profile={data.adminProfile} />
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
@@ -41,21 +42,6 @@ const Admin_Dashboard = ({ adminDashboardData }) => {
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
                 <i className="ri-search-line text-lg"></i>
               </span>
-            </div>
-
-            {/* Right: Actions & Profile */}
-            <div className="order-1 md:order-2 hidden md:block">
-            <ProfileAction profile={data.adminProfile} />
-            </div>
-          </div>
-          <div className="hidden md:flex flex-col lg:flex-row justify-between">
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800">
-                {data.adminProfile.name}  Dashboard
-              </h2>
-              <p className="text-gray-600 mt-1">
-                Welcome back, {data.adminProfile.name} here’s your daily summary
-              </p>
             </div>
           </div>
           <div>
@@ -135,7 +121,7 @@ const Admin_Dashboard = ({ adminDashboardData }) => {
                 <h3 className="md:text-lg font-semibold text-gray-800">
                   Brands Overview
                 </h3>
-                <Link to="/brands/add">
+                <Link to="/dashboard/add-brand">
                   <button className="bg-blue-500 text-white font-semibold px-4 py-2.5 rounded-md hover:bg-blue-700 transition-colors flex items-center gap-1.5 text-xs md:text-sm">
                     <i className="ri-add-line"></i>
                     Add <span className="hidden md:block">New Brand</span>
@@ -146,24 +132,44 @@ const Admin_Dashboard = ({ adminDashboardData }) => {
                 <table className="w-full text-sm">
                   <thead className="text-left text-gray-900 bg-gray-50">
                     <tr>
-                      <th className="p-3 font-medium whitespace-nowrap">S.No.</th>
-                      <th className="p-3 font-medium whitespace-nowrap">Brand Name</th>
-                      <th className="p-3 font-medium whitespace-nowrap">Email</th>
-                      <th className="p-3 font-medium whitespace-nowrap">Website</th>
-                      <th className="p-3 font-medium whitespace-nowrap text-center">Staffs</th>
+                      <th className="p-3 font-medium whitespace-nowrap">
+                        S.No.
+                      </th>
+                      <th className="p-3 font-medium whitespace-nowrap">
+                        Brand Name
+                      </th>
+                      <th className="p-3 font-medium whitespace-nowrap">
+                        Email
+                      </th>
+                      <th className="p-3 font-medium whitespace-nowrap">
+                        Website
+                      </th>
+                      <th className="p-3 font-medium whitespace-nowrap text-center">
+                        Staffs
+                      </th>
                       <th className="p-3 font-medium whitespace-nowrap text-center">
                         Creation Date
                       </th>
-                      <th className="p-3 font-medium whitespace-nowrap text-center">Status</th>
-                      <th className="p-3 font-medium whitespace-nowrap text-right hidden">Actions</th>
+                      <th className="p-3 font-medium whitespace-nowrap text-center">
+                        Status
+                      </th>
+                      <th className="p-3 font-medium whitespace-nowrap text-right hidden">
+                        Actions
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     {data.brandsOverview.brands.map((brand, index) => (
                       <tr key={brand.id} className="border-t border-gray-200">
-                        <td className="whitespace-nowrap py-3 px-5 text-gray-600">{index + 1}</td>
-                        <td className="whitespace-nowrap p-3 text-gray-600">{brand.name}</td>
-                        <td className="whitespace-nowrap p-3 text-gray-600">{brand.email}</td>
+                        <td className="whitespace-nowrap py-3 px-5 text-gray-600">
+                          {index + 1}
+                        </td>
+                        <td className="whitespace-nowrap p-3 text-gray-600">
+                          {brand.name}
+                        </td>
+                        <td className="whitespace-nowrap p-3 text-gray-600">
+                          {brand.email}
+                        </td>
                         <td className="whitespace-nowrap p-3 text-blue-600 hover:underline">
                           <a
                             href={brand.website}
